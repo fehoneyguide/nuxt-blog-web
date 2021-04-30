@@ -1,0 +1,38 @@
+import type { NuxtConfig } from '@nuxt/types'
+
+const config: NuxtConfig = {
+  build: {
+    transpile: [/^element-ui/],
+  },
+  buildModules: [
+    '@nuxtjs/composition-api/module', // Nuxt Composition-Api
+    '@nuxt/typescript-build',
+    // https://go.nuxtjs.dev/typescript
+    // https://go.nuxtjs.dev/stylelint
+    '@nuxtjs/stylelint-module',
+  ],
+  css: ['element-ui/lib/theme-chalk/index.css', '~/assets/styles/reset.scss'],
+  env: {},
+  components: true,
+  head: {
+    title: 'head-title',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'A boilerplate to start a Nuxt+TS project quickly',
+      },
+    ],
+    link: [],
+  },
+  loading: { color: '#0c64c1' },
+  modules: [],
+  plugins: [
+    // '~/plugins/truncate'
+    '~/plugins/element-ui',
+  ],
+}
+
+export default config
