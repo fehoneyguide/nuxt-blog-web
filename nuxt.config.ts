@@ -11,11 +11,15 @@ const config: NuxtConfig = {
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
   ],
-  css: ['element-ui/lib/theme-chalk/index.css', '~/assets/styles/reset.scss'],
+  css: [
+    'element-ui/lib/theme-chalk/index.css',
+    '~/assets/styles/reset.scss',
+    '~/assets/styles/global.scss',
+  ],
   env: {},
   components: true,
   head: {
-    title: 'head-title',
+    title: '前端厚说',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

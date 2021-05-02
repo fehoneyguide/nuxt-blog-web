@@ -1,7 +1,9 @@
 <template>
-  <div class="index-view-container">
-    <vast-header-box />
-    <vast-main></vast-main>
+  <div class="view-container">
+    <VastMainHeaderBox></VastMainHeaderBox>
+    <VastMainContainer></VastMainContainer>
+
+    <!-- <section class="box"></section> -->
   </div>
 </template>
 
@@ -17,9 +19,12 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
-.index-view-container {
-  position: relative;
-  width: 100%;
+<style lang="scss" scoped>
+.view-container {
+  .box {
+    width: 200px;
+    height: 1000px;
+    border: 1px solid red;
+  }
 }
 </style>

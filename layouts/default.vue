@@ -1,14 +1,12 @@
 <template>
-  <div id="default-app">
+  <div id="vast-app">
     <Nuxt />
+    <div class="global-component-box"></div>
   </div>
 </template>
 
 <style lang="scss">
-body {
-  height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
-  background-color: #f4f4f5;
+#vast-app {
+  overflow-x: initial;
 }
 </style>
