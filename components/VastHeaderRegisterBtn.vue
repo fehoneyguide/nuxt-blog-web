@@ -7,7 +7,12 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   head: {},
   setup() {
-    return {}
+    const handleRegister = () => {
+      console.log(`点击了注册`)
+    }
+    return {
+      handleRegister,
+    }
   },
 })
 </script>

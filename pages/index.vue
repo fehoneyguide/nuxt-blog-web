@@ -2,7 +2,7 @@
   <div class="view-container">
     <VastMainHeaderBox></VastMainHeaderBox>
     <VastMainContainer></VastMainContainer>
-
+    <VastFollowBiLi />
     <!-- <section class="box"></section> -->
   </div>
 </template>

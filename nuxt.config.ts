@@ -15,6 +15,7 @@ const config: NuxtConfig = {
     'element-ui/lib/theme-chalk/index.css',
     '~/assets/styles/reset.scss',
     '~/assets/styles/global.scss',
+    '~/assets/styles/ele-ui.scss',
   ],
   env: {},
   components: true,

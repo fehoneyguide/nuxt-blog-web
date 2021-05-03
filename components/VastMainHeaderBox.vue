@@ -5,9 +5,32 @@
         <VastHeaderLogo />
         <nav class="main-nav">
           <ul class="nav-list">
-            <li></li>
-            <li></li>
-            <li></li>
+            <li class="main-nav-list">
+              <ul class="phone-hide">
+                <li class="nav-item">
+                  <nuxt-link to="">首页</nuxt-link>
+                </li>
+                <li class="nav-item">
+                  <nuxt-link to="">互鱼</nuxt-link>
+                </li>
+                <li class="nav-item">
+                  <nuxt-link to="">实战</nuxt-link>
+                </li>
+                <li class="nav-item">
+                  <nuxt-link to="">粉丝</nuxt-link>
+                </li>
+                <li class="nav-item">
+                  <nuxt-link to="">活动</nuxt-link>
+                </li>
+              </ul>
+            </li>
+            <section class="right"></section>
+            <li class="nav-item search">
+              <VastHeaderSearch />
+            </li>
+            <li class="nav-item add">
+              <VastMainHeaderCreation />
+            </li>
             <li class="nav-item autu">
               <VastHeaderRegisterBtn />
               <VastHeaderLoginBtn />
@@ -17,7 +40,7 @@
       </div>
     </header>
     <el-dialog
-      :visible.sync="dialogVisible"
+      visible.sync="false"
       width="23.5rem"
       :close-on-click-modal="false"
     >
@@ -70,10 +93,40 @@ export default defineComponent({
         .nav-list {
           display: flex;
           align-items: center;
+          justify-content: space-evenly;
           height: 100%;
           margin: 0;
-          justify-content: flex-end;
           position: relative;
+          .main-nav-list {
+            display: flex;
+            .phone-hide {
+              display: flex;
+              .nav-item {
+                padding: 0 1.5rem;
+                height: 5rem;
+                color: #71777c;
+                font-size: 1.3rem;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                margin: 0;
+                a {
+                  color: #007fff;
+                  cursor: pointer;
+                  text-decoration: none;
+                }
+              }
+              .search {
+                background-color: pink;
+                flex: 1 1 auto;
+                justify-content: flex-end;
+                cursor: auto;
+              }
+              .add {
+                cursor: default;
+              }
+            }
+          }
         }
       }
     }
