@@ -8,10 +8,10 @@
             <li class="main-nav-list">
               <ul class="phone-hide">
                 <li class="nav-item">
-                  <nuxt-link to="">首页</nuxt-link>
+                  <nuxt-link to="/">首页</nuxt-link>
                 </li>
                 <li class="nav-item">
-                  <nuxt-link to="">互鱼</nuxt-link>
+                  <nuxt-link to="/fish">互鱼</nuxt-link>
                 </li>
                 <li class="nav-item">
                   <nuxt-link to="">实战</nuxt-link>
@@ -19,8 +19,8 @@
                 <li class="nav-item">
                   <nuxt-link to="">粉丝</nuxt-link>
                 </li>
-                <li class="nav-item">
-                  <nuxt-link to="">活动</nuxt-link>
+                <li class="nav-item active">
+                  <nuxt-link to="/events">活动</nuxt-link>
                 </li>
               </ul>
             </li>
@@ -40,7 +40,7 @@
       </div>
     </header>
     <el-dialog
-      visible.sync="false"
+      visible.sync="true"
       width="23.5rem"
       :close-on-click-modal="false"
     >
@@ -110,6 +110,13 @@ export default defineComponent({
                 align-items: center;
                 display: flex;
                 margin: 0;
+                a {
+                  color: #71777c;
+                  cursor: pointer;
+                  text-decoration: none;
+                }
+              }
+              .active {
                 a {
                   color: #007fff;
                   cursor: pointer;

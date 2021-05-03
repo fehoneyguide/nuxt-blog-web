@@ -9,32 +9,21 @@
               <header>
                 <div class="follow-header follow-header-info">
                   <div class="breadcrumb">
-                    <p class="cur">我的B站粉丝</p>
+                    <p class="cur">我的掘金粉丝</p>
                   </div>
                 </div>
               </header>
               <div class="list-wrap">
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
-                <VastFollowBiLi />
+                <p v-if="fetchState.pending || !fetchState.timestamp">
+                  正在获取数据
+                </p>
+                <template v-else>
+                  <VastFollowBiLi
+                    v-for="item in fetchedJJFansList"
+                    :key="item.user_id"
+                    :item="item"
+                  />
+                </template>
               </div>
             </div>
           </div>
@@ -46,6 +35,38 @@
     </div>
   </main>
 </template>
+
+<script lang="ts">
+import { defineComponent, useFetch, ref } from '@nuxtjs/composition-api'
+interface IJJFansItem {
+  avatar_large: string
+  user_name: string
+  job_title: string
+  description: string
+}
+import axios from 'axios'
+export default defineComponent({
+  head: {},
+  setup() {
+    const fetchedJJFansList = ref<IJJFansItem[]>([])
+
+    // 网络请求
+
+    const { fetch, fetchState } = useFetch(async () => {
+      const res = await axios.get(
+        'http://127.0.0.1:2222/jjFans?jj_user_id=3491704661872910&cursor=0&limit=20'
+      )
+      fetchedJJFansList.value = res.data.data.data
+      console.log(fetchState)
+    })
+    fetch()
+    return {
+      fetchedJJFansList,
+      fetchState,
+    }
+  },
+})
+</script>
 
 <style lang="scss" scoped>
 .main-container {

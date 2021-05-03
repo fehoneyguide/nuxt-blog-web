@@ -1,17 +1,47 @@
 <template>
-  <button class="login-btn" @click="handleRegister">注册</button>
+  <button class="login-btn" @click="handleRegister">
+    注册 {{ showRegisterFlag }} --
+  </button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  useFetch,
+  ref,
+  useStore,
+  computed,
+} from '@nuxtjs/composition-api'
+interface IJJFansItem {
+  avatar_large: string
+  user_name: string
+  job_title: string
+  description: string
+}
+
+// export interface State {
+//   user: Object
+// }
+
+import axios from 'axios'
 export default defineComponent({
   head: {},
   setup() {
-    const handleRegister = () => {
-      console.log(`点击了注册`)
-    }
+    const fetchedJJFansList = ref<IJJFansItem[]>([])
+    const store = useStore()
+    // const handleRegister = () => {}
+    // 网络请求
+
+    const { fetch, fetchState } = useFetch(async () => {
+      const res = await axios.get(
+        'http://127.0.0.1:2222/jjFans?jj_user_id=3491704661872910&cursor=0&limit=20'
+      )
+      fetchedJJFansList.value = res.data || []
+    })
+    // fetch()
     return {
-      handleRegister,
+      showRegisterFlag: computed(() => store.state.user.showRegisterFlag),
+      handleRegister: () => store.commit('user/changeShowRegisterFlag', true),
     }
   },
 })
