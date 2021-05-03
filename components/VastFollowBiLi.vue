@@ -1,10 +1,5 @@
 <template>
   <div class="bili-card">
-    <div class="follow-header follow-header-info">
-      <div class="breadcrumb">
-        <p class="cur">我的B站粉丝</p>
-      </div>
-    </div>
     <div class="follow-content">
       <div class="empty"></div>
       <div class="content">
@@ -21,7 +16,6 @@
             </div>
           </li>
         </ul>
-        <ul class="be-pager"></ul>
       </div>
     </div>
   </div>
@@ -39,27 +33,12 @@ export default defineComponent({
 <style lang="scss">
 .bili-card {
   position: relative;
-  min-height: 600px;
   border-left: 1px solid #eee;
-  .follow-header {
-    border-bottom: 1px solid #e5e9ef;
-    padding-bottom: 20px;
-    min-height: 30px;
-    margin: 20px 20px 0;
-    .breadcrumb {
-      line-height: 30px;
-      font-size: 0;
-      .cur {
-        color: #222;
-        font-size: 18px;
-      }
-    }
-  }
   .follow-content {
     .content {
       padding-bottom: 10px;
       .relation-list {
-        padding: 0 20px 20px;
+        padding: 0 20px 0 20px;
         .list-item {
           border-bottom: 1px solid #eee;
           display: block;

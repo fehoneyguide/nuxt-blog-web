@@ -117,7 +117,6 @@ export default defineComponent({
                 }
               }
               .search {
-                background-color: pink;
                 flex: 1 1 auto;
                 justify-content: flex-end;
                 cursor: auto;
