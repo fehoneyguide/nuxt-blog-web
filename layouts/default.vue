@@ -62,12 +62,20 @@ export default defineComponent({
             to: '/fans/juejin',
           },
         ]
-      } else if (routeUrl.value === 'events') {
+      } else if (
+        routeUrl.value === 'events-hot' ||
+        routeUrl.value === 'events-lottery'
+      ) {
         subTitleList.value = [
           {
             id: '1',
             name: '热门活动',
             to: '/events/hot',
+          },
+          {
+            id: '2',
+            name: '抽奖进行时',
+            to: '/events/lottery',
           },
         ]
       } else {
@@ -80,6 +88,9 @@ export default defineComponent({
       (newParams) => {
         routeUrl.value = newParams
         handleSubTitle()
+      },
+      {
+        immediate: true,
       }
     )
 
@@ -140,7 +151,6 @@ export default defineComponent({
           }
         }
         a.nuxt-link-exact-active {
-          font-weight: bold;
           color: #007fff;
           cursor: pointer;
           text-decoration: none;

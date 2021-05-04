@@ -12,7 +12,7 @@
           <div class="address">
             <span>不限</span>
           </div>
-          <div class="btn-jsoin">活动详情</div>
+          <div class="btn-jsoin" @click="handleToDetail">活动详情</div>
         </div>
       </div>
     </div>
@@ -30,8 +30,12 @@ import {
 export default defineComponent({
   setup(_props) {
     console.log(_props)
-
-    return {}
+    const handleToDetail = () => {
+      window.open(`https://t.bilibili.com/516913002135599242?tab=2`, `_blank`)
+    }
+    return {
+      handleToDetail,
+    }
   },
 })
 </script>

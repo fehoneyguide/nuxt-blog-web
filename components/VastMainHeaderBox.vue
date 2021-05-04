@@ -136,7 +136,6 @@ export default defineComponent({
                 }
               }
               a.nuxt-link-active {
-                font-weight: bold;
                 color: #007fff;
                 cursor: pointer;
                 text-decoration: none;

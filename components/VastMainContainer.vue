@@ -14,16 +14,16 @@
                 </div>
               </header>
               <div class="list-wrap">
-                <p v-if="fetchState.pending || !fetchState.timestamp">
+                <!-- <p v-if="fetchState.pending || !fetchState.timestamp">
                   正在获取数据
-                </p>
-                <template v-else>
+                </p> -->
+                <!-- <template v-else>
                   <VastFollowBiLi
                     v-for="item in fetchedJJFansList"
                     :key="item.user_id"
                     :item="item"
                   />
-                </template>
+                </template> -->
               </div>
             </div>
           </div>
@@ -52,17 +52,17 @@ export default defineComponent({
 
     // 网络请求
 
-    const { fetch, fetchState } = useFetch(async () => {
-      const res = await axios.get(
-        'http://127.0.0.1:2222/jjFans?jj_user_id=3491704661872910&cursor=0&limit=20'
-      )
-      fetchedJJFansList.value = res.data.data.data
-      console.log(fetchState)
-    })
-    fetch()
+    // const { fetch, fetchState } = useFetch(async () => {
+    //   const res = await axios.get(
+    //     'http://127.0.0.1:2222/jjFans?jj_user_id=3491704661872910&cursor=0&limit=20'
+    //   )
+    //   fetchedJJFansList.value = res.data.data.data
+    //   console.log(fetchState)
+    // })
+    // fetch()
     return {
       fetchedJJFansList,
-      fetchState,
+      // fetchState,
     }
   },
 })
