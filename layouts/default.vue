@@ -4,14 +4,8 @@
       <VastMainHeaderBox></VastMainHeaderBox>
       <nav class="view-nav">
         <ul class="sub-tag">
-          <li class="nav-item active">
-            <nuxt-link to="/fans/vast"> 站内粉丝</nuxt-link>
-          </li>
-          <li class="nav-item active">
-            <nuxt-link to="/fans/bili"> B站粉丝</nuxt-link>
-          </li>
-          <li class="nav-item active">
-            <nuxt-link to="/fans/juejin"> 掘金粉丝</nuxt-link>
+          <li class="nav-item" v-for="item in subTitleList" :key="item.id">
+            <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>
           </li>
         </ul>
       </nav>
@@ -25,6 +19,76 @@
     <div class="global-component-box"></div>
   </div>
 </template>
+
+<script>
+import {
+  computed,
+  defineComponent,
+  useRoute,
+  watch,
+  ref,
+} from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  setup() {
+    const route = useRoute()
+    const routeUrl = ref('index')
+    const subTitleList = ref([
+      // {
+      //   id: '1',
+      //   name: '计算机通识',
+      //   to: '/computer',
+      // },
+    ])
+    const handleSubTitle = () => {
+      if (
+        routeUrl.value === 'fans-vast' ||
+        (routeUrl.value === 'fans-bili') | (routeUrl.value === 'fans-juejin')
+      ) {
+        subTitleList.value = [
+          {
+            id: '1',
+            name: '站内用户',
+            to: '/fans/vast',
+          },
+          {
+            id: '2',
+            name: 'B站粉丝',
+            to: '/fans/bili',
+          },
+          {
+            id: '3',
+            name: '掘金粉丝',
+            to: '/fans/juejin',
+          },
+        ]
+      } else if (routeUrl.value === 'events') {
+        subTitleList.value = [
+          {
+            id: '1',
+            name: '热门活动',
+            to: '/events/hot',
+          },
+        ]
+      } else {
+        subTitleList.value = []
+      }
+    }
+
+    watch(
+      () => route.value.name,
+      (newParams) => {
+        routeUrl.value = newParams
+        handleSubTitle()
+      }
+    )
+
+    return {
+      subTitleList,
+    }
+  },
+})
+</script>
 
 <style lang="scss" scoped>
 #vast-app {
@@ -72,8 +136,14 @@
           a {
             cursor: pointer;
             text-decoration: none;
-            color: #007fff;
+            color: #71777c;
           }
+        }
+        a.nuxt-link-exact-active {
+          font-weight: bold;
+          color: #007fff;
+          cursor: pointer;
+          text-decoration: none;
         }
       }
     }

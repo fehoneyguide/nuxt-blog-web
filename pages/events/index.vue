@@ -1,5 +1,14 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+  <div></div>
 </template>
+
+<script>
+import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  setup() {
+    const router = useRouter()
+    router.push('/events/hot')
+  },
+})
+</script>

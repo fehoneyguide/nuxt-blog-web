@@ -29,6 +29,7 @@ const config: NuxtConfig = {
         name: 'description',
         content: 'A boilerplate to start a Nuxt+TS project quickly',
       },
+      { hid: 'ebook-home referrer', name: 'referrer', content: 'never' },
     ],
     link: [],
   },

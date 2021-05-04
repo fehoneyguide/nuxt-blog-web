@@ -7,20 +7,12 @@
           <ul class="nav-list">
             <li class="main-nav-list">
               <ul class="phone-hide">
-                <li class="nav-item">
-                  <nuxt-link to="/">首页</nuxt-link>
-                </li>
-                <li class="nav-item">
-                  <nuxt-link to="/fish">互鱼</nuxt-link>
-                </li>
-                <li class="nav-item">
-                  <nuxt-link to="/tutorial">教程</nuxt-link>
-                </li>
-                <li class="nav-item">
-                  <nuxt-link to="/fans/vast">粉丝</nuxt-link>
-                </li>
-                <li class="nav-item active">
-                  <nuxt-link to="/events/hot">活动</nuxt-link>
+                <li
+                  class="nav-item"
+                  v-for="item in mainTitleList"
+                  :key="item.id"
+                >
+                  <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
                 </li>
               </ul>
             </li>
@@ -59,18 +51,32 @@ export default defineComponent({
       {
         id: '1',
         name: '首页',
+        to: '/home',
       },
       {
         id: '2',
         name: '互鱼',
+        to: '/fish',
       },
       {
         id: '3',
-        name: '实战',
+        name: '教程',
+        to: '/tutorial',
+      },
+      {
+        id: '4',
+        name: '粉丝',
+        to: '/fans',
+      },
+      {
+        id: '5',
+        name: '活动',
+        to: '/events',
       },
     ])
     return {
       dialogVisible,
+      mainTitleList,
     }
   },
 })
@@ -129,13 +135,13 @@ export default defineComponent({
                   text-decoration: none;
                 }
               }
-              .active {
-                a {
-                  color: #007fff;
-                  cursor: pointer;
-                  text-decoration: none;
-                }
+              a.nuxt-link-active {
+                font-weight: bold;
+                color: #007fff;
+                cursor: pointer;
+                text-decoration: none;
               }
+
               .search {
                 flex: 1 1 auto;
                 justify-content: flex-end;
