@@ -14,13 +14,13 @@
                   <nuxt-link to="/fish">互鱼</nuxt-link>
                 </li>
                 <li class="nav-item">
-                  <nuxt-link to="">实战</nuxt-link>
+                  <nuxt-link to="/tutorial">教程</nuxt-link>
                 </li>
                 <li class="nav-item">
-                  <nuxt-link to="">粉丝</nuxt-link>
+                  <nuxt-link to="/fans/vast">粉丝</nuxt-link>
                 </li>
                 <li class="nav-item active">
-                  <nuxt-link to="/events">活动</nuxt-link>
+                  <nuxt-link to="/events/hot">活动</nuxt-link>
                 </li>
               </ul>
             </li>
@@ -55,7 +55,20 @@ export default defineComponent({
   head: {},
   setup() {
     const dialogVisible = ref(true)
-
+    const mainTitleList = ref([
+      {
+        id: '1',
+        name: '首页',
+      },
+      {
+        id: '2',
+        name: '互鱼',
+      },
+      {
+        id: '3',
+        name: '实战',
+      },
+    ])
     return {
       dialogVisible,
     }

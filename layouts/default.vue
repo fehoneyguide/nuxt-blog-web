@@ -5,14 +5,14 @@
       <nav class="view-nav">
         <ul class="sub-tag">
           <li class="nav-item active">
-            <nuxt-link to=""> 五一抽奖送书</nuxt-link>
-          </li>
-          <!-- <li class="nav-item active">
-            <nuxt-link to=""> B站粉丝</nuxt-link>
+            <nuxt-link to="/fans/vast"> 站内粉丝</nuxt-link>
           </li>
           <li class="nav-item active">
-            <nuxt-link to=""> 掘金粉丝</nuxt-link>
-          </li> -->
+            <nuxt-link to="/fans/bili"> B站粉丝</nuxt-link>
+          </li>
+          <li class="nav-item active">
+            <nuxt-link to="/fans/juejin"> 掘金粉丝</nuxt-link>
+          </li>
         </ul>
       </nav>
       <div class="main">

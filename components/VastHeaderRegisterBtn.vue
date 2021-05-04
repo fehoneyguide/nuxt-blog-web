@@ -1,7 +1,5 @@
 <template>
-  <button class="login-btn" @click="handleRegister">
-    注册 {{ showRegisterFlag }} --
-  </button>
+  <button class="login-btn" @click="handleRegister">注册</button>
 </template>
 
 <script lang="ts">
@@ -40,7 +38,7 @@ export default defineComponent({
     })
     // fetch()
     return {
-      showRegisterFlag: computed(() => store.state.user.showRegisterFlag),
+      showRegisterFlag: false,
       handleRegister: () => store.commit('user/changeShowRegisterFlag', true),
     }
   },

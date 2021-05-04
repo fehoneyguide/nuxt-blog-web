@@ -6,13 +6,13 @@
         <ul class="relation-list">
           <li class="list-item">
             <nuxt-link to="">
-              <img src="https://yayxs.github.io/avatar.jpg" alt="" />
+              <img :src="item.face" alt="" />
             </nuxt-link>
             <div class="content">
               <a href="">
-                <span class="fnas-name"> 社畜的 </span>
+                <span class="fnas-name"> {{ item.uname }} </span>
               </a>
-              <p class="desc">这个人没有简介</p>
+              <p class="desc">{{ item.sign || '这个人没有填简介啊~~~' }}</p>
             </div>
           </li>
         </ul>
@@ -25,7 +25,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   head: {},
-  setup() {
+  props: ['item'],
+  setup(props) {
     return {}
   },
 })
@@ -65,7 +66,7 @@ export default defineComponent({
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
-              max-width: 68px;
+              max-width: 180px;
               display: inline-block;
               margin-bottom: 10px;
               span {

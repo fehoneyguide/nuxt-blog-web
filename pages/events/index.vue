@@ -1,3 +1,5 @@
 <template>
-  <div>活动</div>
+  <div>
+    <Nuxt />
+  </div>
 </template>
