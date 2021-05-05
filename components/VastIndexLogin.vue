@@ -72,7 +72,7 @@
       border: none;
       border-radius: 2px;
       width: 100%;
-      height: 40px;
+      height: 34px;
       outline: none;
       background-color: #09f;
       cursor: pointer;

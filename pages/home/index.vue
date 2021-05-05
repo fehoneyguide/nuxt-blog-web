@@ -1,3 +1,5 @@
 <template>
-  <div>首页</div>
+  <div>
+    <VastMainContainer />
+  </div>
 </template>

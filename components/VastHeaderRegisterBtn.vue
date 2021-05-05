@@ -24,21 +24,13 @@ interface IJJFansItem {
 import axios from 'axios'
 export default defineComponent({
   head: {},
-  setup() {
+  setup(_props, context) {
     const fetchedJJFansList = ref<IJJFansItem[]>([])
-    const store = useStore()
-    // const handleRegister = () => {}
-    // 网络请求
 
-    // const { fetch, fetchState } = useFetch(async () => {
-    //   const res = await axios.get(
-    //     'http://127.0.0.1:2222/jjFans?jj_user_id=3491704661872910&cursor=0&limit=20'
-    //   )
-    //   fetchedJJFansList.value = res.data || []
-    // })
+    const store = useStore()
+
     // fetch()
     return {
-      showRegisterFlag: false,
       handleRegister: () => store.commit('user/changeShowRegisterFlag', true),
     }
   },

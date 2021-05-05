@@ -16,6 +16,7 @@
       <!-- <VastFollowBiLi /> -->
       <!-- <section class="box"></section> -->
     </div>
+
     <div class="global-component-box"></div>
   </div>
 </template>

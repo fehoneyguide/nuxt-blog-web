@@ -18,7 +18,6 @@ export const mutations: MutationTree<IUserState> = {
     state: { showRegisterFlag: boolean },
     newShowRegisterFlag: boolean
   ) => {
-    console.log(newShowRegisterFlag)
     state.showRegisterFlag = newShowRegisterFlag
   },
 }

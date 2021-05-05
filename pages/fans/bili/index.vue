@@ -1,5 +1,12 @@
 <template>
   <div>
+    <header>
+      <div class="follow-header follow-header-info">
+        <div class="breadcrumb">
+          <p class="cur">我的BiliBili粉丝（{{ total }}位）</p>
+        </div>
+      </div>
+    </header>
     <VastFollowBiLi v-for="item in fetchedFans" :key="item.mid" :item="item" />
     <div class="page">
       <el-pagination
@@ -8,7 +15,7 @@
         @current-change="handleCurrentChange"
         :current-page="currentPage"
         :page-size="50"
-        layout=" prev, pager, next, jumper"
+        layout="total,prev, pager, next, jumper "
         :total="total"
       >
       </el-pagination>
@@ -71,5 +78,19 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   margin: 2rem 0;
+}
+.follow-header {
+  border-bottom: 1px solid #e5e9ef;
+  padding-bottom: 20px;
+  min-height: 30px;
+  margin: 20px 20px 0;
+  .breadcrumb {
+    line-height: 30px;
+    font-size: 0;
+    .cur {
+      color: #222;
+      font-size: 18px;
+    }
+  }
 }
 </style>

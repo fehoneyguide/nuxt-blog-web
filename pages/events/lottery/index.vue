@@ -1,3 +1,5 @@
 <template>
-  <div>抽奖</div>
+  <div>
+    <VastLuckyDraw />
+  </div>
 </template>

@@ -31,8 +31,9 @@
         </nav>
       </div>
     </header>
+
     <el-dialog
-      visible.sync="true"
+      :visible.sync="showRegisterFlag"
       width="23.5rem"
       :close-on-click-modal="false"
     >
@@ -42,11 +43,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  computed,
+  useStore,
+} from '@nuxtjs/composition-api'
+
+import type { IUserState } from '../store/user'
+
 export default defineComponent({
   head: {},
-  setup() {
-    const dialogVisible = ref(true)
+  setup(_props, context) {
+    // const store = useStore()
     const mainTitleList = ref([
       {
         id: '1',
@@ -74,9 +83,12 @@ export default defineComponent({
         to: '/events',
       },
     ])
+    const showRegisterFlag = computed(
+      () => (context.root.$store.state as IUserState).showRegisterFlag
+    )
     return {
-      dialogVisible,
       mainTitleList,
+      showRegisterFlag,
     }
   },
 })

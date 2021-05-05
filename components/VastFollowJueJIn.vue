@@ -4,7 +4,7 @@
       <a>
         <img :src="item.avatar_large" alt="" class="avatar" />
         <div class="info-box">
-          <a href=""
+          <a
             ><span class="username"> {{ item.user_name }}</span>
           </a>
           <div class="detail">{{ item.description || '还没有啊~' }}</div>
@@ -47,6 +47,7 @@ a {
   align-items: center;
   padding: 0.5rem 2.4rem;
   min-height: 7rem;
+  cursor: pointer;
 }
 .avatar {
   flex: 0 0 auto;

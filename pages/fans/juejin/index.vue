@@ -1,5 +1,12 @@
 <template>
   <div>
+    <header>
+      <div class="follow-header follow-header-info">
+        <div class="breadcrumb">
+          <p class="cur">我的掘金粉丝（{{ total }}位）</p>
+        </div>
+      </div>
+    </header>
     <VastFollowJueJIn
       v-for="item in fetchedItems"
       :key="item.user_id"
@@ -11,7 +18,7 @@
         @current-change="handleCurrentChange"
         :current-page="currentPage"
         :page-size="20"
-        layout=" prev, pager, next, jumper"
+        layout="total,prev, pager, next, jumper"
         :total="total"
       >
       </el-pagination>
@@ -63,5 +70,19 @@ export default defineComponent({
   margin: 30px 10px;
   display: flex;
   justify-content: center;
+}
+.follow-header {
+  border-bottom: 1px solid #e5e9ef;
+  padding-bottom: 20px;
+  min-height: 30px;
+  margin: 20px 20px 0;
+  .breadcrumb {
+    line-height: 30px;
+    font-size: 0;
+    .cur {
+      color: #222;
+      font-size: 18px;
+    }
+  }
 }
 </style>
