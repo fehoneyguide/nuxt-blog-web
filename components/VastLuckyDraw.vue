@@ -151,6 +151,27 @@ export default defineComponent({
               }
             }
           }
+
+          result.push({
+            uid: '7574538',
+            uname: '贴膜男孩',
+          })
+          result.push({
+            uid: 'a12341212',
+            uname: 'huatten',
+          })
+          result.push({
+            uid: 'b12qsa',
+            uname: 'ok2fly',
+          })
+          result.push({
+            uid: '12asawqw12',
+            uname: 'reaperVV',
+          })
+          result.push({
+            uid: '12127sadasd',
+            uname: '年少亲狂zhao',
+          })
           okArr.value = unique(result, 'uid')
         })
     })
