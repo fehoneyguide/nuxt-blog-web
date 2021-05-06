@@ -7,7 +7,8 @@
           <div class="timeline-entry-list">
             <div class="entry-list-container">
               <div class="list-wrap">
-                <VasTPersonalInfo />
+                <!-- <VastPersonalInfo /> -->
+                <VastArticleItem></VastArticleItem>
               </div>
             </div>
           </div>
@@ -22,15 +23,14 @@
 
 <script lang="ts">
 import { defineComponent, useFetch, ref } from '@nuxtjs/composition-api'
+import axios from 'axios'
 interface IJJFansItem {
   avatar_large: string
   user_name: string
   job_title: string
   description: string
 }
-import axios from 'axios'
 export default defineComponent({
-  head: {},
   setup() {
     const fetchedJJFansList = ref<IJJFansItem[]>([])
 
@@ -49,6 +49,7 @@ export default defineComponent({
       // fetchState,
     }
   },
+  head: {},
 })
 </script>
 

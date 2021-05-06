@@ -24,16 +24,16 @@
           <li class="item">
             <span class="title">用户名</span>
             <div class="input-box">
-              <input type="text" name="" id="" class="input" />
+              <input id="" type="text" name="" class="input" />
             </div>
           </li>
           <li class="item">
             <span class="title">个人主页</span>
             <div class="input-box">
               <input
+                id=""
                 type="text"
                 name=""
-                id=""
                 placeholder="请填写你的主页"
                 class="input"
               />
