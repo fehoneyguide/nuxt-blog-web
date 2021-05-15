@@ -38,6 +38,7 @@ const config: NuxtConfig = {
   plugins: [
     // '~/plugins/truncate'
     '~/plugins/element-ui',
+    { src: '@/plugins/vue-mavon-editor', ssr: false },
   ],
 }
 

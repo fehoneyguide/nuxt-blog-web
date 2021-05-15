@@ -29,6 +29,7 @@
     "@nuxtjs/composition-api": "^0.23.4",
     "axios": "^0.21.1",
     "element-ui": "^2.15.1",
+    "mavon-editor": "^2.9.1",
     "nuxt": "^2.15.4",
     "nuxt-property-decorator": "^2.9.1"
   },
