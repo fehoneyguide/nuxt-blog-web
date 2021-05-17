@@ -1,7 +1,12 @@
 <template>
   <div class="relea-container">
     <div class="top-main-title">
-      <input type="text" class="ipt-content" placeholder="输入文章标题……" />
+      <input
+        type="text"
+        class="ipt-content"
+        placeholder="输入文章标题……"
+        @input="handleTitleChange"
+      />
     </div>
     <div class="op-btns">
       <VastReleaseBtn />
@@ -27,13 +32,41 @@
             >
               <el-option
                 v-for="item in lebelOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                :key="item.id"
+                :label="item.labelName"
+                :value="item.id"
               >
               </el-option>
             </el-select>
           </el-form-item>
+          <el-form-item label="文章封面" prop="cover">
+            <div class="cover-upload">
+              <button class="select-btn">
+                <div class="button-slot">
+                  <img
+                    src="https://sf1-scmcdn2-tos.pstatp.com/xitu_juejin_web_editor/img/add.0e2d17b6.svg"
+                    alt=""
+                    height="20px"
+                  />
+                  <div class="uplaod">上传封面</div>
+                </div>
+              </button>
+            </div>
+          </el-form-item>
+          <el-form-item label="编辑摘要" prop="summary">
+            <el-input
+              type="textarea"
+              v-model="formData.summary"
+              placeholder="请输入摘要"
+            ></el-input>
+          </el-form-item>
+
+          <div class="footer">
+            <div class="btn-container">
+              <button class="cancle">取消</button>
+              <button class="confirm" @click="handleConfirm">确定并发布</button>
+            </div>
+          </div>
         </el-form>
       </div>
     </div>
@@ -47,10 +80,16 @@
 </template>
 
 <script lang="ts">
+interface IParams {
+  title: string
+}
+
+import axios from 'axios'
 import {
   defineComponent,
   useRouter,
   computed,
+  useFetch,
   ref,
   Ref,
 } from '@nuxtjs/composition-api'
@@ -64,16 +103,13 @@ export default defineComponent({
     const markdownOption: Ref<object> = ref({
       bold: true, // 粗体
     })
+    const title: Ref<string> = ref('')
     const formData: Ref<object> = ref({
       labelName: 'NodeJS',
+      summary: '',
     })
 
-    const lebelOptions = ref([
-      {
-        value: 'NodeJS',
-        label: 'NodeJS',
-      },
-    ])
+    const lebelOptions = ref([])
 
     const formRules: Ref<object> = ref({
       labelName: [
@@ -81,6 +117,29 @@ export default defineComponent({
       ],
     })
     const handleSelectChange = (): void => {}
+    const handleTitleChange = ({
+      target: { value },
+    }: {
+      target: HTMLInputElement
+    }): void => {
+      title.value = value
+    }
+    const handleConfirm = (e): void => {
+      e.preventDefault()
+
+      const params: IParams = {
+        title: title.value,
+      }
+      console.log(params)
+    }
+    const { fetch, fetchState } = useFetch(async () => {
+      const res = await axios.get(
+        `http://101.201.148.180:3009/api/v1/label?offset=0&limit=10`
+      )
+
+      lebelOptions.value = res.data.data
+    })
+    fetch()
     return {
       isShowPanel,
       handBook,
@@ -90,6 +149,9 @@ export default defineComponent({
       handleSelectChange,
       lebelOptions,
       formRules,
+      handleConfirm,
+      title,
+      handleTitleChange,
     }
   },
 })
@@ -162,11 +224,76 @@ export default defineComponent({
     }
     .form-container {
       .el-form-item {
-        padding: 2rem 0;
+        padding: 1rem 0;
         padding-left: 1rem;
       }
       .el-select {
         width: 335px;
+      }
+      .el-textarea {
+        width: 335px;
+      }
+      .cover-upload {
+        .select-btn {
+          width: 160px;
+          cursor: pointer;
+          height: 86px;
+          background-color: #fafafa;
+          border: 1px dashed #e5e6eb;
+          margin-bottom: 16px;
+          .button-slot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            img {
+              width: 20px;
+              height: 20px;
+            }
+            .upload {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
+              color: #86909c;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+      .footer {
+        border-top: 1px solid #e5e6eb;
+        height: 72px;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        .btn-container {
+          text-align: right;
+          flex: auto;
+          .cancle {
+            width: 90px;
+            padding: 4px 0;
+            cursor: pointer;
+            background-color: #fff;
+            color: #1d7dfa;
+            border: 1px solid #1d7dfa;
+            font-size: 14px;
+            line-height: 22px;
+          }
+          .confirm {
+            width: 90px;
+            padding: 4px 0;
+            cursor: pointer;
+            background-color: #1d7dfa;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 22px;
+            color: #fff;
+            border: none;
+            white-space: nowrap;
+          }
+        }
       }
     }
   }
