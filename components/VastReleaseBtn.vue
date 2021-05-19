@@ -10,11 +10,16 @@ import {
   useRouter,
   computed,
   ref,
+  useStore,
 } from '@nuxtjs/composition-api'
+import { Store } from 'vuex'
 export default defineComponent({
   head: {},
   setup() {
-    const handleRelease = (): void => {}
+    const store: Store<any> = useStore()
+    const handleRelease = (): void => {
+      store.dispatch('changeShow', true)
+    }
     return {
       handleRelease,
     }
