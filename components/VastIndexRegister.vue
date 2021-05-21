@@ -1,6 +1,6 @@
 <template>
   <div class="index-register-container">
-    <div class="title">VB - vast.blog</div>
+    <div class="title">VB - 前端厚说</div>
     <div class="slogan">虽然长的丑但是想得美</div>
     <form action="javascript:">
       <div class="username">

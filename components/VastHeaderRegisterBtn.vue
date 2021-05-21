@@ -3,37 +3,21 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useFetch,
-  ref,
-  useStore,
-  computed,
-} from '@nuxtjs/composition-api'
-interface IJJFansItem {
-  avatar_large: string
-  user_name: string
-  job_title: string
-  description: string
-}
+import { defineComponent, useStore } from '@nuxtjs/composition-api'
+import { Store } from 'vuex'
 
-// export interface State {
-//   user: Object
-// }
-
-import axios from 'axios'
 export default defineComponent({
-  head: {},
-  setup(_props, context) {
-    const fetchedJJFansList = ref<IJJFansItem[]>([])
-
-    const store = useStore()
-
-    // fetch()
+  setup(_props) {
+    const store: Store<any> = useStore()
+    const handleRegister = (): void => {
+      store.commit('user/changeShowRegisterFlag', true)
+      console.log()
+    }
     return {
-      handleRegister: () => store.commit('user/changeShowRegisterFlag', true),
+      handleRegister,
     }
   },
+  head: {},
 })
 </script>
 <style lang="scss">

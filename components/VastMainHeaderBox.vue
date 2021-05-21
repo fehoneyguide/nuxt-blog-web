@@ -8,9 +8,9 @@
             <li class="main-nav-list">
               <ul class="phone-hide">
                 <li
-                  class="nav-item"
                   v-for="item in mainTitleList"
                   :key="item.id"
+                  class="nav-item"
                 >
                   <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
                 </li>
@@ -49,13 +49,13 @@ import {
   computed,
   useStore,
 } from '@nuxtjs/composition-api'
+import { Store } from 'vuex'
 
-import type { IUserState } from '../store/user'
+// import type { IUserState } from '../store/user'
 
 export default defineComponent({
-  head: {},
-  setup(_props, context) {
-    // const store = useStore()
+  setup(_props) {
+    const store: Store<any> = useStore()
     const mainTitleList = ref([
       {
         id: '1',
@@ -83,14 +83,15 @@ export default defineComponent({
         to: '/events',
       },
     ])
-    const showRegisterFlag = computed(
-      () => (context.root.$store.state as IUserState).showRegisterFlag
-    )
+    const showRegisterFlag = computed(() => {
+      return store.state.user.showRegisterFlag
+    })
     return {
       mainTitleList,
       showRegisterFlag,
     }
   },
+  head: {},
 })
 </script>
 
