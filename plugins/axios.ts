@@ -1,21 +1,39 @@
 import { Plugin } from '@nuxt/types'
-// import { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
-// import { initAxios, initCookies } from '~/utils/axios'
+import { AxiosRequestConfig } from 'axios'
+import { initAxios, initCookies } from '~/utils/axios'
+import { UserModule } from '~/store'
 const axiosAccessor: Plugin = (ctx) => {
-  console.log(ctx)
-  // initAxios($axios)
-  // initCookies($cookies)
-  // $axios.onRequest((config: AxiosRequestConfig) => {
-  //   config.startTime = Date.now()
-  //   console.log('发起请求' + config.url)
-  // })
+  const {
+    error,
+    app: { $axios, $cookies },
+  } = ctx
+  initAxios($axios)
+  initCookies($cookies)
+
+  $axios.onRequest((config: AxiosRequestConfig) => {
+    if (UserModule.token) {
+      config.headers.token = UserModule.token
+    }
+    return config
+  })
+
+  $axios.onError((err) => {
+    console.error('请求发生错误', err)
+  })
+
+  $axios.interceptors.response.use(
+    (response: any) => {
+      const { data, status } = response
+      if (status === 200) {
+        return data
+      } else {
+        error({ statusCode: status, message: data.message })
+      }
+    }
+    // (err: any) => {
+    //   // const {} = err.response
+    // }
+  )
 }
-
-// export default function ({ $axios }) {
-
-//   $axios.onError((err) => {
-//     console.error('请求发生错误', err)
-//   })
-// }
 
 export default axiosAccessor

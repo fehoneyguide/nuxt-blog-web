@@ -1,57 +1,44 @@
 // Vuex supports basic typing functionality out of the box
 // import type { Context } from '@nuxt/types'
-import type { GetterTree, MutationTree, ActionTree } from 'vuex'
 
+import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
+
+import { Notification } from 'element-ui'
 import { login } from '~/api'
-export const namespace = 'user'
-export interface IUserState {
-  showRegisterFlag: boolean
-  token: string
-  isLogin: boolean
-}
+import { getToken, setToken, removeToken } from '~/utils/cookies'
+import { userInfo, IUser } from '~/types/user'
 
-export const state = (): IUserState => ({
-  showRegisterFlag: false,
-  token: '',
-  isLogin: false,
+@Module({
+  name: 'user',
+  namespaced: true,
+  stateFactory: true,
 })
-export type RootState = ReturnType<typeof state>
+export default class App extends VuexModule {
+  public token: string = ''
+  public userInfo: userInfo = {}
+  public get username() {
+    return this.userInfo.username || ''
+  }
 
-export const getters: GetterTree<RootState, RootState> = {
-  showRegisterFlag: (state) => state.showRegisterFlag,
-}
-export const MutationType = {
-  CHANGE_SHOW_REGISTER: 'changeShowRegisterFlag',
-  CHANGE_IS_LOGIN: 'changeIsLogin',
-  SET_TOKEN: 'set_token',
-}
+  public get avatar() {
+    return this.userInfo.avatar || ''
+  }
 
-export const mutations: MutationTree<RootState> = {
-  [MutationType.CHANGE_SHOW_REGISTER]: (
-    state: IUserState,
-    newShowRegisterFlag: boolean
-  ) => {
-    state.showRegisterFlag = newShowRegisterFlag
-  },
-  [MutationType.CHANGE_IS_LOGIN]: (state: IUserState, newVal: boolean) => {
-    state.isLogin = newVal
-  },
-  [MutationType.SET_TOKEN]: (state: IUserState, newVal: string) => {
-    state.token = newVal
-  },
-}
+  @Mutation
+  private SET_TOKEN(token: string) {
+    this.token = token
+  }
 
-export const actionType = {
-  LOGIN: 'login',
-}
+  @Mutation
+  private SET_USERINFO(userInfo: userInfo) {
+    this.userInfo = userInfo
+  }
 
-export const actions: ActionTree<RootState, RootState> = {
-  // nuxtServerInit({ commit }, _context: Context) {},
-
-  async [actionType.LOGIN]({ commit }, payload) {
+  @Action
+  public async login(loginInfo: IUser) {
     try {
-      const res = await login(payload)
+      const res = await login(loginInfo)
       console.log(res)
     } catch (error) {}
-  },
+  }
 }

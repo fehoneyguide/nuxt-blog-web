@@ -29,12 +29,14 @@
     "@nuxtjs/auth-next": "5.0.0-1621716493.b9b36c6",
     "@nuxtjs/axios": "^5.13.4",
     "@nuxtjs/composition-api": "^0.23.4",
+    "@nuxtjs/proxy": "^2.1.0",
     "axios": "^0.21.1",
     "cookie-universal-nuxt": "^2.1.4",
     "element-ui": "^2.15.1",
     "mavon-editor": "^2.9.1",
     "nuxt": "^2.15.4",
-    "nuxt-property-decorator": "^2.9.1"
+    "nuxt-property-decorator": "^2.9.1",
+    "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",

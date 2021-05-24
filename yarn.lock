@@ -10566,7 +10566,7 @@ vuex-class@^0.3.2:
 
 vuex-module-decorators@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/vuex-module-decorators/download/vuex-module-decorators-1.0.1.tgz#d34dafb5428a3636f1c26d3d014c15fc9659ccd0"
+  resolved "https://registry.nlark.com/vuex-module-decorators/download/vuex-module-decorators-1.0.1.tgz#d34dafb5428a3636f1c26d3d014c15fc9659ccd0"
   integrity sha1-002vtUKKNjbxwm09AUwV/JZZzNA=
 
 vuex@^3.6.2:

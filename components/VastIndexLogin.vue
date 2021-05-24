@@ -9,7 +9,7 @@
           type="text"
           placeholder="请输入用户名"
           required
-          @blur="handleUserNameBlur"
+          @blur.stop="handleUserNameBlur"
         />
       </div>
       <div class="password">
@@ -42,7 +42,7 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 import { IUser } from '../types/user'
-import { namespace as userStoreNamespace, actionType } from '~/store/user'
+import { isExitApi } from '~/api'
 export default defineComponent({
   setup() {
     const store = useStore()
@@ -50,55 +50,30 @@ export default defineComponent({
       username: '',
       password: '',
     })
-    // function useFetchData(url: string, params: object) {
-    //   const { $axios } = useContext()
-    //   const resCode: Ref<number> = ref(0)
-    //   const { fetch: doFetch } = useFetch(async () => {
-    //     const res = await $axios.$post(`${url}`, params)
-    //     resCode.value = res.code
-    //   })
-    //   return {
-    //     resCode,
-    //     doFetch,
-    //   }
-    // }
-    function useUserNameIsExit(data: IUser) {
-      const { $axios } = useContext()
-      const checkStatus = ref(0)
-      const { fetch: doFetch } = useFetch(async () => {
-        const res = await $axios.$post(`api/v1/user/isExit`, {
-          username: data.username,
-        })
-        checkStatus.value = res.code
-      })
-      return {
-        checkStatus,
-        doFetch,
-      }
-    }
-
-    const { checkStatus, doFetch } = useUserNameIsExit(data)
-    // const { resCode: resCodeLogin, doFetch: doFetchLogin } = useFetchData(
-    //   `api/v1/user/login`,
-    //   data
-    // )
-    const handleUserNameBlur = (): void => {
+    const handleUserNameBlur = async (): Promise<void> => {
       // 判断用户名是否ok
       if (!data.username) {
         console.log('用户名为空，不做校验')
       } else {
-        doFetch()
+        // todo
+        try {
+          const res: any = await isExitApi({
+            username: data.username,
+          })
+          if (res.code !== 0) {
+            console.log('用户名不ok')
+          } else {
+            console.log('用户名ok')
+          }
+        } catch (error) {}
       }
     }
-    const handleLoginClick = async (): void => {
+    const handleLoginClick = async (): Promise<void> => {
       try {
         if (!data.username && !data.password) {
           console.log('用户名密码为空，请检查')
-        } else if (checkStatus.value === 0) {
-          await store.dispatch(
-            `${userStoreNamespace}/${actionType.LOGIN}`,
-            data
-          )
+        } else {
+          await store.dispatch(`user/login`, data)
         }
       } catch (error) {}
     }

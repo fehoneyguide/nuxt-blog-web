@@ -53,7 +53,7 @@ import {
   useStore,
 } from '@nuxtjs/composition-api'
 
-import type { IUserState } from '../store/user'
+// import type { IUserState } from '../store/user'
 
 export default defineComponent({})
 </script>
