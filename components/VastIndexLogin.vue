@@ -4,13 +4,24 @@
     <div class="slogan">虽然长的丑但是想得美</div>
     <form action="javascript:">
       <div class="username">
-        <input type="text" placeholder="请输入用户名" required />
+        <input
+          v-model="username"
+          type="text"
+          placeholder="请输入用户名"
+          required
+          @blur="handleUserNameBlur"
+        />
       </div>
       <div class="password">
-        <input type="text" placeholder="请输入密码" required />
+        <input
+          v-model="password"
+          type="text"
+          placeholder="请输入密码"
+          required
+        />
       </div>
 
-      <button class="register-btn">登录</button>
+      <button class="register-btn" @click.stop="handleLoginClick">登录</button>
     </form>
     <div class="agreement-box">
       <span>登录即表示签订卖身契</span>
@@ -19,6 +30,87 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import {
+  defineComponent,
+  ref,
+  reactive,
+  toRefs,
+  useFetch,
+  useContext,
+  useStore,
+} from '@nuxtjs/composition-api'
+import { IUser } from '../types/user'
+import { namespace as userStoreNamespace, actionType } from '~/store/user'
+export default defineComponent({
+  setup() {
+    const store = useStore()
+    const data: IUser = reactive({
+      username: '',
+      password: '',
+    })
+    // function useFetchData(url: string, params: object) {
+    //   const { $axios } = useContext()
+    //   const resCode: Ref<number> = ref(0)
+    //   const { fetch: doFetch } = useFetch(async () => {
+    //     const res = await $axios.$post(`${url}`, params)
+    //     resCode.value = res.code
+    //   })
+    //   return {
+    //     resCode,
+    //     doFetch,
+    //   }
+    // }
+    function useUserNameIsExit(data: IUser) {
+      const { $axios } = useContext()
+      const checkStatus = ref(0)
+      const { fetch: doFetch } = useFetch(async () => {
+        const res = await $axios.$post(`api/v1/user/isExit`, {
+          username: data.username,
+        })
+        checkStatus.value = res.code
+      })
+      return {
+        checkStatus,
+        doFetch,
+      }
+    }
+
+    const { checkStatus, doFetch } = useUserNameIsExit(data)
+    // const { resCode: resCodeLogin, doFetch: doFetchLogin } = useFetchData(
+    //   `api/v1/user/login`,
+    //   data
+    // )
+    const handleUserNameBlur = (): void => {
+      // 判断用户名是否ok
+      if (!data.username) {
+        console.log('用户名为空，不做校验')
+      } else {
+        doFetch()
+      }
+    }
+    const handleLoginClick = async (): void => {
+      try {
+        if (!data.username && !data.password) {
+          console.log('用户名密码为空，请检查')
+        } else if (checkStatus.value === 0) {
+          await store.dispatch(
+            `${userStoreNamespace}/${actionType.LOGIN}`,
+            data
+          )
+        }
+      } catch (error) {}
+    }
+
+    return {
+      ...toRefs(data),
+      handleUserNameBlur,
+      handleLoginClick,
+    }
+  },
+})
+</script>
 
 <style lang="scss">
 .index-register-container {

@@ -13,7 +13,7 @@
             </div>
           </div>
           <aside class="index-aside">
-            <VastIndexLogin></VastIndexLogin>
+            <VastIndexLogin v-if="!isShowLogin"></VastIndexLogin>
           </aside>
         </div>
       </div>
@@ -22,31 +22,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useFetch, ref } from '@nuxtjs/composition-api'
-import axios from 'axios'
-interface IJJFansItem {
-  avatar_large: string
-  user_name: string
-  job_title: string
-  description: string
-}
+import { defineComponent, computed, useStore } from '@nuxtjs/composition-api'
+import { Store } from 'vuex'
+// import axios from 'axios'
+
 export default defineComponent({
   setup() {
-    const fetchedJJFansList = ref<IJJFansItem[]>([])
-
-    // 网络请求
-
-    // const { fetch, fetchState } = useFetch(async () => {
-    //   const res = await axios.get(
-    //     'http://127.0.0.1:2222/jjFans?jj_user_id=3491704661872910&cursor=0&limit=20'
-    //   )
-    //   fetchedJJFansList.value = res.data.data.data
-    //   console.log(fetchState)
-    // })
-    // fetch()
+    const store: Store<any> = useStore()
+    const isShowLogin = computed(() => store.state.user.isLogin)
     return {
-      fetchedJJFansList,
-      // fetchState,
+      isShowLogin,
     }
   },
   head: {},

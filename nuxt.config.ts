@@ -17,6 +17,9 @@ const config: NuxtConfig = {
     '~/assets/styles/global.scss',
     '~/assets/styles/ele-ui.scss',
   ],
+  router: {
+    middleware: ['auth'],
+  },
   env: {},
   components: true,
   head: {
@@ -34,9 +37,14 @@ const config: NuxtConfig = {
     link: [],
   },
   loading: { color: '#0c64c1' },
-  modules: [],
+  modules: ['@nuxtjs/axios'],
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: 'http://101.201.148.180:3009', // Used as fallback if no runtime config is provided
+    },
+  },
   plugins: [
-    // '~/plugins/truncate'
+    '~/plugins/axios.ts',
     '~/plugins/element-ui',
     { src: '@/plugins/vue-mavon-editor', ssr: false },
   ],

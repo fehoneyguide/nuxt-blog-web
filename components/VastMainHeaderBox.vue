@@ -25,7 +25,7 @@
             </li>
             <li class="nav-item autu">
               <VastHeaderRegisterBtn />
-              <VastHeaderLoginBtn />
+              <!-- <VastHeaderLoginBtn /> -->
             </li>
           </ul>
         </nav>
