@@ -6049,6 +6049,11 @@ is-plain-obj@^3.0.0:
   resolved "https://registry.npm.taobao.org/is-plain-obj/download/is-plain-obj-3.0.0.tgz?cache=0&sync_timestamp=1618601044820&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-plain-obj%2Fdownload%2Fis-plain-obj-3.0.0.tgz#af6f2ea14ac5a646183a5bbdb5baabbc156ad9d7"
   integrity sha1-r28uoUrFpkYYOlu9tbqrvBVq2dc=
 
+is-plain-object@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npm.taobao.org/is-plain-object/download/is-plain-object-3.0.1.tgz#662d92d24c0aa4302407b0d45d21f2251c85f85b"
+  integrity sha1-Zi2S0kwKpDAkB7DUXSHyJRyF+Fs=
+
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.nlark.com/is-plain-object/download/is-plain-object-2.0.4.tgz?cache=0&sync_timestamp=1618846974259&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fis-plain-object%2Fdownload%2Fis-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
@@ -10553,6 +10558,13 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.nlark.com/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
+
+vue-types@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/vue-types/download/vue-types-2.0.3.tgz#d4d3b124e8ae09e2d58785054451a6eb7e672d6d"
+  integrity sha1-1NOxJOiuCeLVh4UFRFGm635nLW0=
+  dependencies:
+    is-plain-object "3.0.1"
 
 vue@^2.6.12:
   version "2.6.12"

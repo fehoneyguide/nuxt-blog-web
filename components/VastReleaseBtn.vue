@@ -1,29 +1,23 @@
 <template>
   <div class="release-btn">
-    <button @click="handleRelease">发布</button>
+    <button @click.stop="handleRelease">发布</button>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useRouter,
-  computed,
-  ref,
-  useStore,
-} from '@nuxtjs/composition-api'
+import { defineComponent, useStore } from '@nuxtjs/composition-api'
 import { Store } from 'vuex'
 export default defineComponent({
-  head: {},
   setup() {
     const store: Store<any> = useStore()
     const handleRelease = (): void => {
-      store.dispatch('changeShow', true)
+      store.commit('create/CHANGE_RELEASE_SHOW', true)
     }
     return {
       handleRelease,
     }
   },
+  head: {},
 })
 </script>
 

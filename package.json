@@ -36,6 +36,7 @@
     "mavon-editor": "^2.9.1",
     "nuxt": "^2.15.4",
     "nuxt-property-decorator": "^2.9.1",
+    "vue-types": "^2.0.3",
     "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {

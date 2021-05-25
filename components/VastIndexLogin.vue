@@ -24,7 +24,7 @@
       <button class="register-btn" @click.stop="handleLoginClick">登录</button>
     </form>
     <div class="agreement-box">
-      <span>登录即表示签订卖身契</span>
+      <span>登录即表示统一本站协议</span>
       <br />
       <span>协议请看--></span>
     </div>

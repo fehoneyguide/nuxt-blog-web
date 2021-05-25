@@ -11,12 +11,12 @@
     <div class="op-btns">
       <VastReleaseBtn />
     </div>
-    <div class="panel" v-if="isShowPanel">
+    <div v-if="isShowPanel" class="panel">
       <div class="title">发布文章</div>
       <div class="form-container">
         <el-form
-          :model="formData"
           ref="form"
+          :model="formData"
           label-width="80px"
           :inline="false"
           size="small"
@@ -41,7 +41,11 @@
           </el-form-item>
           <el-form-item label="文章封面" prop="cover">
             <div class="cover-upload">
-              <button class="select-btn">
+              <button
+                class="select-btn"
+                type="button"
+                @click.stop="handleUploadCover"
+              >
                 <div class="button-slot">
                   <img
                     src="https://sf1-scmcdn2-tos.pstatp.com/xitu_juejin_web_editor/img/add.0e2d17b6.svg"
@@ -55,28 +59,41 @@
           </el-form-item>
           <el-form-item label="编辑摘要" prop="summary">
             <el-input
-              type="textarea"
               v-model="formData.summary"
+              type="textarea"
               placeholder="请输入摘要"
             ></el-input>
           </el-form-item>
 
           <div class="footer">
             <div class="btn-container">
-              <button class="cancle">取消</button>
-              <button class="confirm" @click="handleConfirm">确定并发布</button>
+              <button class="cancle" type="button" @click.stop="handleCancle">
+                取消
+              </button>
+              <!-- 要设置type="button" button在浏览器中默认的类型为submit -->
+              <button class="confirm" type="button" @click.stop="handleConfirm">
+                确定并发布
+              </button>
             </div>
           </div>
         </el-form>
       </div>
     </div>
-    <input type="file" v-show="isShowFile" />
+    <input
+      v-show="isShowFile"
+      id="ipt-file"
+      type="file"
+      accept="image/*"
+      name="cover"
+      @change="handleChangeCover"
+    />
     <div class="mavonEditor">
       <no-ssr>
         <mavon-editor
-          :toolbars="markdownOption"
           v-model="handBook"
+          :toolbars="markdownOption"
           :ishljs="true"
+          class="editor"
           @change="handleEditChange"
         />
       </no-ssr>
@@ -85,14 +102,6 @@
 </template>
 
 <script lang="ts">
-interface IParams {
-  title: string // 文章的标题
-  summary: string // 文章摘要
-  content: string // 文章内容
-  labelIds: number
-}
-
-import axios from 'axios'
 import {
   defineComponent,
   useRouter,
@@ -101,15 +110,29 @@ import {
   ref,
   Ref,
   useStore,
+  onMounted,
+  reactive,
+  toRefs,
 } from '@nuxtjs/composition-api'
 import type { Store } from 'vuex'
+
+import { labelListApi, createApi } from '~/api'
+
+interface IParams {
+  title: string // 文章的标题
+  summary: string // 文章摘要
+  content: string // 文章内容
+}
+interface IFormData {
+  labelName: string
+  summary: string
+}
+
 export default defineComponent({
-  head: {},
   layout: 'editor',
   setup() {
     const store: Store<any> = useStore()
-    const isShowPanel = computed(() => store.state.create.isShow)
-    // const isShowPanel: Ref<boolean> = ref(true)
+    const isShowPanel = computed(() => store.state.create.changeReleaseShow)
     const handBook: Ref<string> = ref('')
     const isShowFile: Ref<boolean> = ref(false)
     const markdownOption: Ref<object> = ref({
@@ -162,10 +185,19 @@ export default defineComponent({
         { required: true, message: '请输入标签名称', trigger: 'blur' },
       ],
     })
-    const handleEditChange = (val: string, render: string): void => {
-      // console.log(val)
-      console.log(render)
+    const handleEditChange = (_: string, render: string): void => {
       content.value = render
+    }
+    const handleChangeCover = (e: any): void => {
+      const fileList = [...e.target.files]
+      console.log(fileList)
+      if (fileList.length < 1) {
+        return
+      } else {
+        const file = fileList[0]
+        console.log(file)
+      }
+      e.target.value = ''
     }
     const handleSelectChange = (labelId: string): void => {
       labelIds.value = labelId
@@ -177,34 +209,42 @@ export default defineComponent({
     }): void => {
       title.value = value
     }
-    const handleConfirm = (e: any): void => {
-      e.preventDefault()
-      createApi()
-    }
-
-    const { fetch: createApi, fetchState: createApiStatus } = useFetch(
-      async () => {
-        const params: IParams = {
-          title: title.value,
-          summary: formData.value.summary,
-          content: content.value,
-          labelIds: Number(labelIds.value),
-        }
-        const res = await axios.post(
-          `http://101.201.148.180:3009/api/v1/article`,
-          params
-        )
-        console.log(res)
+    const handleConfirm = async (): Promise<void> => {
+      const params: IParams = {
+        title: title.value || '测试标题',
+        content: content.value || '测试摘要',
+        summary: formData.value.summary,
       }
-    )
-    const { fetch, fetchState } = useFetch(async () => {
-      const res = await axios.get(
-        `http://101.201.148.180:3009/api/v1/label?offset=0&limit=10`
-      )
 
-      lebelOptions.value = res.data.data
+      console.log(params)
+      try {
+        const res = await createApi(params)
+        console.log(res)
+      } catch (error) {}
+    }
+    const handleCancle = (): void => {
+      store.commit('create/CHANGE_RELEASE_SHOW', false)
+    }
+    const handleUploadCover = (): void => {
+      // 获取inpt标签
+      const ipt: HTMLInputElement | null = document.querySelector('#ipt-file')
+      ipt?.click()
+    }
+    const fetchLabels = async (): Promise<void> => {
+      const params = {
+        offset: 0,
+        limit: 10,
+      }
+      try {
+        const res: any = await labelListApi(params)
+        if (res.code === 0) {
+          lebelOptions.value = res.data
+        }
+      } catch (error) {}
+    }
+    onMounted(async () => {
+      await fetchLabels()
     })
-    fetch()
     return {
       isShowPanel,
       handBook,
@@ -218,13 +258,18 @@ export default defineComponent({
       title,
       handleTitleChange,
       handleEditChange,
+      handleCancle,
+      handleUploadCover,
+      handleChangeCover,
     }
   },
+  head: {},
 })
 </script>
 
 <style lang="scss" scoped>
 .relea-container {
+  min-height: calc(100vh - 3rem);
   position: relative;
   .op-btns {
     position: fixed;
@@ -365,7 +410,10 @@ export default defineComponent({
   }
   .mavonEditor {
     width: 100%;
-    height: 100%;
+    min-height: 90vh;
+    .editor {
+      min-height: 90vh;
+    }
   }
 }
 </style>

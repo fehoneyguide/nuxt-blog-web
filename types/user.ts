@@ -9,3 +9,8 @@ export interface userInfo {
   token?: string
   avatar?: string
 }
+
+export interface IPageParams {
+  offset: number
+  limit: number
+}

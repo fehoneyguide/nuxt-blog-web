@@ -1,22 +1,16 @@
-import type { Context } from '@nuxt/types'
-import type { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
 
-export const namespace = 'create'
-
-export interface IShowPublishPopupState {
-  isShow: boolean
-}
-
-export const state = (): IShowPublishPopupState => ({
-  isShow: false,
+@Module({
+  name: 'create',
+  namespaced: true,
+  stateFactory: true,
 })
+export default class App extends VuexModule {
+  public changeReleaseShow: boolean = false
 
-export const MutationType = {
-  CHANGE_SHOW: 'changeShow',
-}
-
-export const mutations: MutationTree<IShowPublishPopupState> = {
-  [MutationType.CHANGE_SHOW]: (state, newVal: boolean) => {
-    state.isShow = newVal
-  },
+  @Mutation
+  private CHANGE_RELEASE_SHOW(changeReleaseShow: boolean) {
+    console.log(changeReleaseShow)
+    this.changeReleaseShow = changeReleaseShow
+  }
 }

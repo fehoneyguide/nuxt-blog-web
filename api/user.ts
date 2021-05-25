@@ -1,4 +1,5 @@
 import { $axios } from '~/utils/axios'
+import { IPageParams } from '~/types/user'
 /**
  * @description 登录接口
  * @param data
@@ -20,4 +21,11 @@ export const isExitApi = (data: object) =>
     url: 'user/isExit',
     method: 'post',
     data,
+  })
+
+export const listApi = (params: IPageParams) =>
+  $axios({
+    url: 'user',
+    method: 'get',
+    params,
   })

@@ -20,6 +20,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #vast-app {
+  min-height: 100vh;
   overflow-x: initial;
   .main {
     position: relative;
@@ -27,8 +28,10 @@ export default defineComponent({
     width: 100%;
     max-width: 100%;
     display: block;
+    min-height: calc(100vh - 2rem);
   }
   .view-container {
+    min-height: 100vh;
     position: relative;
     margin: 0 auto;
     width: 100%;

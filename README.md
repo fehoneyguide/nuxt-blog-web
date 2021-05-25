@@ -14,7 +14,8 @@
    - elementUI
 4. Nuxt.js module
 
-   - axios
+   - @nuxtjs/axios
+   - @nuxtjs/proxy
 
 5. Linting tools
 
