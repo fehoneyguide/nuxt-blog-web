@@ -38,11 +38,17 @@
                   src="https://sf6-ttcdn-tos.pstatp.com/img/user-avatar/ed0c58d0b0fbece798227044e252820f~300x300.image"
                   alt="洋小洋同学的头像"
                   class="avatar"
+                  @click.stop="handleClick"
                 />
               </li>
             </template>
           </ul>
         </nav>
+        <VastAvatarTip
+          v-show="isShow"
+          class="avatar-tip"
+          @emit-flag="emitFlag"
+        />
       </div>
     </header>
 
@@ -58,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, Ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup(_props) {
@@ -94,12 +100,21 @@ export default defineComponent({
       isShowDialog.value = val
     }
     const isShowRegisterBtn = ref(false)
-
+    const handleClick = (): void => {
+      isShow.value = !isShow.value
+    }
+    const isShow: Ref<boolean> = ref(false)
+    const emitFlag = (val: boolean) => {
+      isShow.value = !val
+    }
     return {
       mainTitleList,
       isShowDialog,
       changeDialog,
       isShowRegisterBtn,
+      handleClick,
+      isShow,
+      emitFlag,
     }
   },
   head: {},
@@ -199,6 +214,11 @@ export default defineComponent({
             }
           }
         }
+      }
+      .avatar-tip {
+        position: absolute;
+        top: 50px;
+        right: 0;
       }
     }
   }

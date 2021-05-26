@@ -17,7 +17,7 @@
             </div>
           </div>
           <aside class="index-aside">
-            <!-- <VastIndexLogin v-if="!isShowLogin"></VastIndexLogin> -->
+            <VastIndexLogin v-if="!isShowLogin"></VastIndexLogin>
             <VastInfoWrapper></VastInfoWrapper>
           </aside>
         </div>
