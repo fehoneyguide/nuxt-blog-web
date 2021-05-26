@@ -1,17 +1,13 @@
 <template>
-  <button class="login-btn" @click="handleRegister">注册</button>
+  <button class="login-btn" @click.stop="handleRegister">注册</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, useStore } from '@nuxtjs/composition-api'
-import { Store } from 'vuex'
-
+import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
-  setup(_props) {
-    const store: Store<any> = useStore()
+  setup(_props, { emit }) {
     const handleRegister = (): void => {
-      store.commit('user/changeShowRegisterFlag', true)
-      console.log()
+      emit('change-dialog', true)
     }
     return {
       handleRegister,

@@ -9,7 +9,11 @@ interface RootState {
 
 // eslint-disable-next-line import/no-mutable-exports
 let UserModule: User
-export const actions: ActionTree<RootState, RootState> = {}
+export const actions: ActionTree<RootState, RootState> = {
+  nuxtServerInit() {
+    UserModule.SetToken()
+  },
+}
 
 function initStore(store: Store<any>): void {
   UserModule = getModule(User, store)

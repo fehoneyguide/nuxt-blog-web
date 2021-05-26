@@ -8,12 +8,17 @@
             <div class="entry-list-container">
               <div class="list-wrap">
                 <!-- <VastPersonalInfo /> -->
-                <!-- <VastArticleItem></VastArticleItem> -->
+                <VastArticleItem
+                  v-for="item in lists"
+                  :key="item.id"
+                  :item="item"
+                ></VastArticleItem>
               </div>
             </div>
           </div>
           <aside class="index-aside">
-            <VastIndexLogin v-if="!isShowLogin"></VastIndexLogin>
+            <!-- <VastIndexLogin v-if="!isShowLogin"></VastIndexLogin> -->
+            <VastInfoWrapper></VastInfoWrapper>
           </aside>
         </div>
       </div>
@@ -22,16 +27,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, useStore } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  computed,
+  useStore,
+  onMounted,
+  ref,
+} from '@nuxtjs/composition-api'
 import { Store } from 'vuex'
-// import axios from 'axios'
+import { articleListApi } from '~/api'
 
 export default defineComponent({
   setup() {
     const store: Store<any> = useStore()
     const isShowLogin = computed(() => store.state.user.isLogin)
+    const lists = ref([])
+    const fetchList = async (): Promise<void> => {
+      try {
+        const params = {
+          offset: 0,
+          limit: 10,
+        }
+        const res: any = await articleListApi(params)
+        if (res.code === 0) {
+          lists.value = res.data
+        }
+      } catch (error) {}
+    }
+
+    onMounted(async () => {
+      await fetchList()
+    })
     return {
       isShowLogin,
+      lists,
     }
   },
   head: {},

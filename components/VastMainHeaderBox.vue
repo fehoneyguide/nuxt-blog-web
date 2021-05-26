@@ -23,39 +23,45 @@
             <li class="nav-item add">
               <VastMainHeaderCreation />
             </li>
-            <li class="nav-item autu">
-              <VastHeaderRegisterBtn />
+            <li v-if="isShowRegisterBtn" class="nav-item autu">
+              <VastHeaderRegisterBtn @change-dialog="changeDialog" />
               <!-- <VastHeaderLoginBtn /> -->
             </li>
+            <template v-else>
+              <li class="nav-item notification">
+                <nuxt-link to="">
+                  <i class="el-icon-message-solid"></i>
+                </nuxt-link>
+              </li>
+              <li class="nav-item menu">
+                <img
+                  src="https://sf6-ttcdn-tos.pstatp.com/img/user-avatar/ed0c58d0b0fbece798227044e252820f~300x300.image"
+                  alt="洋小洋同学的头像"
+                  class="avatar"
+                />
+              </li>
+            </template>
           </ul>
         </nav>
       </div>
     </header>
 
     <el-dialog
-      :visible.sync="showRegisterFlag"
+      :visible.sync="isShowDialog"
       width="23.5rem"
       :close-on-click-modal="false"
+      close-on-press-escape
     >
-      <VastIndexRegister />
+      <VastIndexRegister @change-dialog="changeDialog" />
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  computed,
-  useStore,
-} from '@nuxtjs/composition-api'
-import { Store } from 'vuex'
-
-// import type { IUserState } from '../store/user'
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup(_props) {
-    const store: Store<any> = useStore()
     const mainTitleList = ref([
       {
         id: '1',
@@ -83,12 +89,17 @@ export default defineComponent({
         to: '/events',
       },
     ])
-    const showRegisterFlag = computed(() => {
-      return store.state.user.showRegisterFlag
-    })
+    const isShowDialog = ref(false)
+    const changeDialog = (val: boolean) => {
+      isShowDialog.value = val
+    }
+    const isShowRegisterBtn = ref(false)
+
     return {
       mainTitleList,
-      showRegisterFlag,
+      isShowDialog,
+      changeDialog,
+      isShowRegisterBtn,
     }
   },
   head: {},
@@ -148,6 +159,7 @@ export default defineComponent({
                   text-decoration: none;
                 }
               }
+
               a.nuxt-link-active {
                 color: #007fff;
                 cursor: pointer;
@@ -162,6 +174,28 @@ export default defineComponent({
               .add {
                 cursor: default;
               }
+            }
+          }
+          .notification {
+            position: relative;
+            i {
+              font-size: 2rem;
+              color: #71777c;
+            }
+          }
+          .menu {
+            position: relative;
+            height: 100%;
+            .avatar {
+              position: absolute;
+              top: 1.2rem;
+              display: inline-block;
+              background-size: cover;
+              background-color: #eee;
+              border-radius: 50%;
+              width: 2.5rem;
+              height: 2.5rem;
+              cursor: pointer;
             }
           }
         }

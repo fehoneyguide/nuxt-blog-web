@@ -56,6 +56,7 @@ export default class App extends VuexModule {
   public async login(loginInfo: IUser) {
     try {
       const res: any = await login(loginInfo)
+      console.log(res)
       if (res && res.code === 0) {
         this.SET_TOKEN(res.data.token)
         this.CHANGE_ISLOGIN(true)

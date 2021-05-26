@@ -11,8 +11,10 @@ const axiosAccessor: Plugin = (ctx) => {
   initCookies($cookies)
 
   $axios.onRequest((config: AxiosRequestConfig) => {
+    console.log('发起了请求~')
+    console.log('token', UserModule.token)
     if (UserModule.token) {
-      config.headers.token = UserModule.token
+      config.headers.Authorization = `Bearer ${UserModule.token}`
     }
     return config
   })

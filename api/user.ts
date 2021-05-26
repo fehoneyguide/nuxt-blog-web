@@ -1,5 +1,17 @@
 import { $axios } from '~/utils/axios'
 import { IPageParams } from '~/types/user'
+
+/**
+ * @description 注册
+ * @param data
+ * @returns
+ */
+export const registerApi = (data: object) =>
+  $axios({
+    url: 'user/register',
+    method: 'post',
+    data,
+  })
 /**
  * @description 登录接口
  * @param data

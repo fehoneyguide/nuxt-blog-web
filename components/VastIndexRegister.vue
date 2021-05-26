@@ -4,29 +4,74 @@
     <div class="slogan">虽然长的丑但是想得美</div>
     <form action="javascript:">
       <div class="username">
-        <input type="text" placeholder="请输入用户名" required />
+        <input
+          v-model="username"
+          type="text"
+          placeholder="请输入用户名"
+          required
+        />
         <img
           src="https://b-gold-cdn.xitu.io/v3/static/img/greeting.1415c1c.png"
           alt=""
         />
       </div>
       <div class="password">
-        <input type="text" placeholder="请输入密码" required />
+        <input
+          v-model="password"
+          type="text"
+          placeholder="请输入密码"
+          required
+        />
         <img
           src="https://b-gold-cdn.xitu.io/v3/static/img/blindfold.58ce423.png"
           alt=""
         />
       </div>
       <img src="https://b-gold-cdn.xitu.io/v3/static/img/normal.0447fe9.png" />
-      <button class="register-btn">注册</button>
+      <button class="register-btn" type="button" @click.stop="handleClick">
+        注册
+      </button>
     </form>
     <div class="agreement-box">
-      <span>注册登录即表示签订卖身契</span>
+      <span>注册即表示</span>
       <br />
-      <span>协议请看--></span>
+      <span>同意本站协议 <a>隐私政策</a> <a>用户协议</a> </span>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent, reactive, toRefs } from '@nuxtjs/composition-api'
+
+import { Notification } from 'element-ui'
+import { registerApi } from '~/api'
+
+export default defineComponent({
+  setup(_, { emit }) {
+    const info = reactive({
+      username: '',
+      password: '',
+    })
+    const handleClick = async () => {
+      try {
+        const res: any = await registerApi(info)
+        if (res.code === 0) {
+          Notification({
+            title: '提示',
+            message: '注册成功',
+          })
+          // 关闭弹窗
+          emit('change-dialog', false)
+        }
+      } catch (error) {}
+    }
+    return {
+      ...toRefs(info),
+      handleClick,
+    }
+  },
+})
+</script>
 
 <style lang="scss">
 .index-register-container {
@@ -109,6 +154,11 @@
     font-size: 1.168rem;
     line-height: 1.5;
     color: #767676;
+    a {
+      color: #007fff;
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
 }
 </style>

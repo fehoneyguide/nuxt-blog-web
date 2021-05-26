@@ -43,12 +43,15 @@ const config: NuxtConfig = {
   ],
   publicRuntimeConfig: {
     axios: {
-      baseURL: 'http://101.201.148.180:3009/api/v1/', // Used as fallback if no runtime config is provided
+      // baseURL: 'http://101.201.148.180:3009/api/v1/', // Used as fallback if no runtime config is provided
+      baseURL: 'http://127.0.0.1:2222/api/v1/', // Used as fallback if no runtime config is provided
     },
   },
   plugins: [
     '~/plugins/axios.ts',
     '~/plugins/element-ui',
+    '~/plugins/highlight',
+    { src: '~/plugins/bus.js', ssr: false },
     { src: '@/plugins/vue-mavon-editor', ssr: false },
   ],
 }
