@@ -8,25 +8,24 @@
             <div class="text-desc">
               {{ item.summary || '' }}
             </div>
-            <div class="text-tag">
+            <!-- <div class="text-tag">
               标签：
               <VastTagsBox />
-              <!-- <tag-box :tag-list="item.tags"></tag-box> -->
-            </div>
+            </div> -->
           </div>
           <div class="info-data">
             <div class="data-view">
               <i class="el-icon-view"></i>
-              <span>100</span>
+              <span>972</span>
             </div>
             <div class="data-view">
               <i class="el-icon-chat-round"></i>
               <span>12</span>
             </div>
-            <!-- <div class="data-view">
-              <i class="mio-icon-zan iconfont"></i>
-              <span>123</span>
-            </div> -->
+            <div class="data-view">
+              <i class="el-icon-price-tag"></i>
+              <span>{{ item.labelCount || 9 }}</span>
+            </div>
             <div class="data-view">
               <span>创建时间</span>
               <span> {{ item.createAt }} </span>
@@ -38,7 +37,7 @@
           </div>
         </div>
         <div class="item-right-img">
-          <img src="https://yayxs.github.io/avatar.jpg" alt="" />
+          <img :src="item.coverImg" alt="" />
         </div>
       </div>
     </el-card>
@@ -108,6 +107,7 @@ export default defineComponent({
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            line-height: 1.3;
           }
         }
         .info-data {

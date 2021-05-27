@@ -1,11 +1,11 @@
 <template>
   <nuxt-link to="">
     <div class="events-inner">
-      <div class="banner" v-if="item.id === '0'"></div>
-      <div class="banner1" v-if="item.id === '1'"></div>
-      <div class="banner2" v-if="item.id === '2'"></div>
-      <div class="banner3" v-if="item.id === '3'"></div>
-      <div class="banner4" v-if="item.id === '4'"></div>
+      <div v-if="item.id === '0'" class="banner"></div>
+      <div v-if="item.id === '1'" class="banner1"></div>
+      <div v-if="item.id === '2'" class="banner2"></div>
+      <div v-if="item.id === '3'" class="banner3"></div>
+      <div v-if="item.id === '4'" class="banner4"></div>
 
       <div class="message">
         <div class="title">{{ item.title }}</div>

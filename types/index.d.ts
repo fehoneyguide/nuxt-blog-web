@@ -23,3 +23,8 @@ declare module 'vuex/types/index' {
     $axios: NuxtAxiosInstance
   }
 }
+
+export interface IAppConfig {
+  host: string | number // 主机
+  port: number | string
+}

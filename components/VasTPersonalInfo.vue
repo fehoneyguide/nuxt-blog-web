@@ -57,11 +57,15 @@ import {
 
 export default defineComponent({})
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .setting-view {
-  margin-bottom: 2rem;
-  width: 58rem;
-  max-width: 100%;
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-sizing: border-box;
+  width: calc(100% - 254px);
+  min-height: 626px;
   .sub-view-box {
     position: relative;
     padding: 2.7rem 4rem 7rem;

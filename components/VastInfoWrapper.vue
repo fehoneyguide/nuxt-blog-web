@@ -85,7 +85,6 @@ export default defineComponent({
   overflow: hidden;
   transition: all 0.3s;
   margin-top: 15px;
-  margin-left: 15px;
   flex: 0 0 300px;
   height: auto;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);

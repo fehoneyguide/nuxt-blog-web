@@ -25,7 +25,7 @@ export default defineComponent({
       {
         id: 2,
         name: '设置',
-        link: '/settings/profile',
+        link: '/settings',
         classVal: 'el-icon-setting',
       },
       {

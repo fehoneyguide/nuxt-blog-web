@@ -1,5 +1,7 @@
 import type { NuxtConfig } from '@nuxt/types'
 
+import appConfig from './app.config'
+
 const config: NuxtConfig = {
   build: {
     transpile: [/^element-ui/],
@@ -62,7 +64,7 @@ const config: NuxtConfig = {
   publicRuntimeConfig: {
     axios: {
       // baseURL: 'http://101.201.148.180:3009/api/v1/', // Used as fallback if no runtime config is provided
-      baseURL: 'http://127.0.0.1:2222/api/v1/', // Used as fallback if no runtime config is provided
+      baseURL: `http://127.0.0.1:${appConfig.port}/api/v1/`, // Used as fallback if no runtime config is provided
     },
   },
   plugins: [
