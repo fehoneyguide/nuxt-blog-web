@@ -16,6 +16,7 @@ const config: NuxtConfig = {
     '~/assets/styles/reset.scss',
     '~/assets/styles/global.scss',
     '~/assets/styles/ele-ui.scss',
+    '~/node_modules/highlight.js/styles/github.css',
   ],
   // router: {
   //   middleware: ['auth'],
@@ -37,7 +38,24 @@ const config: NuxtConfig = {
     link: [],
   },
   loading: { color: '#0c64c1' },
-  modules: ['@nuxtjs/axios', '@nuxtjs/proxy', 'cookie-universal-nuxt'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy',
+    'cookie-universal-nuxt',
+    '@nuxtjs/markdownit',
+  ],
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    use: [
+      'markdown-it-div',
+      'markdown-it-highlightjs',
+      'markdown-it-mark',
+      'markdown-it-deflist',
+    ],
+    runtime: true,
+  },
   proxy: [
     // '/api/v1':{},
   ],
@@ -50,7 +68,7 @@ const config: NuxtConfig = {
   plugins: [
     '~/plugins/axios.ts',
     '~/plugins/element-ui',
-    '~/plugins/highlight',
+    '~/plugins/highlight.js',
     { src: '~/plugins/bus.js', ssr: false },
     { src: '@/plugins/vue-mavon-editor', ssr: false },
   ],

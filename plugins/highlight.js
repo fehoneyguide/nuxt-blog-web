@@ -1,16 +1,14 @@
-import Vue from 'vue'
-import VueHighlightJS from 'vue-highlight.js'
+// import Vue from 'vue'
+import Hljs from 'highlight.js/lib/highlight'
 
-import javascript from 'highlight.js/lib/languages/javascript'
-import scss from 'highlight.js/lib/languages/scss'
-import xml from 'highlight.js/lib/languages/xml'
+const Highlight = {}
+Highlight.install = (Vue, _) => {
+  Vue.directive('highlight', (el) => {
+    const blocks = el.querySelectorAll('pre code')
+    blocks.forEach((block) => {
+      Hljs.highlightBlock(block)
+    })
+  })
+}
 
-import 'highlight.js/styles/dracula.css'
-
-Vue.use(VueHighlightJS, {
-  languages: {
-    javascript,
-    scss,
-    xml,
-  },
-})
+export default Highlight

@@ -1524,6 +1524,24 @@
     consola "^2.15.0"
     eslint-webpack-plugin "^2.4.1"
 
+"@nuxtjs/markdownit-loader@^1.1.1":
+  version "1.2.0"
+  resolved "https://registry.nlark.com/@nuxtjs/markdownit-loader/download/@nuxtjs/markdownit-loader-1.2.0.tgz#02e31b778bdbb61c13a5991021d660a21393b2c2"
+  integrity sha1-AuMbd4vbthwTpZkQIdZgohOTssI=
+  dependencies:
+    highlight.js "^10.5.0"
+    loader-utils "^1.1.0"
+    markdown-it "^8.3.1"
+
+"@nuxtjs/markdownit@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.nlark.com/@nuxtjs/markdownit/download/@nuxtjs/markdownit-2.0.0.tgz#5fcd35afdb78f328ba2dbc1f678f0c0bb9ea85f9"
+  integrity sha1-X801r9t48yi6LbwfZ48MC7nqhfk=
+  dependencies:
+    "@nuxtjs/markdownit-loader" "^1.1.1"
+    defu "^3.2.2"
+    raw-loader "^4.0.2"
+
 "@nuxtjs/proxy@^2.1.0":
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/@nuxtjs/proxy/download/@nuxtjs/proxy-2.1.0.tgz#fa7715a11d237fa1273503c4e9e137dd1bf5575b"
@@ -4008,7 +4026,7 @@ detect-file@^1.0.0:
   resolved "https://registry.npm.taobao.org/detect-file/download/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
   integrity sha1-8NZtA2cqglyxtzvbP+YjEMjlUrc=
 
-detect-indent@6.0.0, detect-indent@^6.0.0:
+detect-indent@6.0.0:
   version "6.0.0"
   resolved "https://registry.npm.taobao.org/detect-indent/download/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
   integrity sha1-Cr0PVJ9p/GZZolT+lnhhhrb1KP0=
@@ -4242,7 +4260,7 @@ enquirer@^2.3.5, enquirer@^2.3.6:
   dependencies:
     ansi-colors "^4.1.1"
 
-entities@^1.1.1:
+entities@^1.1.1, entities@~1.1.1:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/entities/download/entities-1.1.2.tgz?cache=0&sync_timestamp=1611535322406&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fentities%2Fdownload%2Fentities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha1-vfpzUplmTfr9NFKe1PhSKidf6lY=
@@ -5464,7 +5482,7 @@ highlight.js-async-webpack@^1.0.4:
   resolved "https://registry.npm.taobao.org/highlight.js-async-webpack/download/highlight.js-async-webpack-1.0.4.tgz#c06b67bf99f049045d62b756e5855b0912ec616c"
   integrity sha1-wGtnv5nwSQRdYrdW5YVbCRLsYWw=
 
-highlight.js@^10.7.2:
+highlight.js@^10.5.0, highlight.js@^10.7.2:
   version "10.7.2"
   resolved "https://registry.nlark.com/highlight.js/download/highlight.js-10.7.2.tgz#89319b861edc66c48854ed1e6da21ea89f847360"
   integrity sha1-iTGbhh7cZsSIVO0ebaIeqJ+Ec2A=
@@ -6054,11 +6072,6 @@ is-plain-obj@^3.0.0:
   resolved "https://registry.npm.taobao.org/is-plain-obj/download/is-plain-obj-3.0.0.tgz?cache=0&sync_timestamp=1618601044820&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-plain-obj%2Fdownload%2Fis-plain-obj-3.0.0.tgz#af6f2ea14ac5a646183a5bbdb5baabbc156ad9d7"
   integrity sha1-r28uoUrFpkYYOlu9tbqrvBVq2dc=
 
-is-plain-object@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npm.taobao.org/is-plain-object/download/is-plain-object-3.0.1.tgz#662d92d24c0aa4302407b0d45d21f2251c85f85b"
-  integrity sha1-Zi2S0kwKpDAkB7DUXSHyJRyF+Fs=
-
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.nlark.com/is-plain-object/download/is-plain-object-2.0.4.tgz?cache=0&sync_timestamp=1618846974259&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fis-plain-object%2Fdownload%2Fis-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
@@ -6344,6 +6357,13 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.npm.taobao.org/lines-and-columns/download/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+linkify-it@^2.0.0:
+  version "2.2.0"
+  resolved "https://registry.npm.taobao.org/linkify-it/download/linkify-it-2.2.0.tgz#e3b54697e78bf915c70a38acd78fd09e0058b1cf"
+  integrity sha1-47VGl+eL+RXHCjis14/QngBYsc8=
+  dependencies:
+    uc.micro "^1.0.1"
+
 lint-staged@^10.5.4:
   version "10.5.4"
   resolved "https://registry.npm.taobao.org/lint-staged/download/lint-staged-10.5.4.tgz?cache=0&sync_timestamp=1612543711990&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flint-staged%2Fdownload%2Flint-staged-10.5.4.tgz#cd153b5f0987d2371fc1d2847a409a2fe705b665"
@@ -6467,6 +6487,11 @@ lodash.flatten@^4.4.0:
   version "4.4.0"
   resolved "https://registry.npm.taobao.org/lodash.flatten/download/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
+
+lodash.flow@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.npm.taobao.org/lodash.flow/download/lodash.flow-3.5.0.tgz#87bf40292b8cf83e4e8ce1a3ae4209e20071675a"
+  integrity sha1-h79AKSuM+D5OjOGjrkIJ4gBxZ1o=
 
 lodash.kebabcase@^4.1.1:
   version "4.1.1"
@@ -6633,6 +6658,45 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+markdown-it-attrs@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/markdown-it-attrs/download/markdown-it-attrs-4.0.0.tgz#eadae3ea0c7d17c5e83b98a4ec95a47f4e4960f5"
+  integrity sha1-6trj6gx9F8XoO5ik7JWkf05JYPU=
+
+markdown-it-deflist@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/markdown-it-deflist/download/markdown-it-deflist-2.1.0.tgz#50d7a56b9544cd81252f7623bd785e28a8dcef5c"
+  integrity sha1-UNela5VEzYElL3YjvXheKKjc71w=
+
+markdown-it-div@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.nlark.com/markdown-it-div/download/markdown-it-div-1.1.0.tgz#779c07a2313a36e59afd54c39907f9bc87c1ab20"
+  integrity sha1-d5wHojE6NuWa/VTDmQf5vIfBqyA=
+
+markdown-it-highlightjs@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.nlark.com/markdown-it-highlightjs/download/markdown-it-highlightjs-3.5.0.tgz#bcb76ef936c7137430fb0077e868d191d5db376b"
+  integrity sha1-vLdu+TbHE3Qw+wB36GjRkdXbN2s=
+  dependencies:
+    highlight.js "^10.7.2"
+    lodash.flow "^3.5.0"
+
+markdown-it-mark@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npm.taobao.org/markdown-it-mark/download/markdown-it-mark-3.0.1.tgz#51257db58787d78aaf46dc13418d99a9f3f0ebd3"
+  integrity sha1-USV9tYeH14qvRtwTQY2ZqfPw69M=
+
+markdown-it@^8.3.1:
+  version "8.4.2"
+  resolved "https://registry.npm.taobao.org/markdown-it/download/markdown-it-8.4.2.tgz?cache=0&sync_timestamp=1618575179015&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmarkdown-it%2Fdownload%2Fmarkdown-it-8.4.2.tgz#386f98998dc15a37722aa7722084f4020bdd9b54"
+  integrity sha1-OG+YmY3BWjdyKqdyIIT0Agvdm1Q=
+  dependencies:
+    argparse "^1.0.7"
+    entities "~1.1.1"
+    linkify-it "^2.0.0"
+    mdurl "^1.0.1"
+    uc.micro "^1.0.5"
+
 mathml-tag-names@^2.1.3:
   version "2.1.3"
   resolved "https://registry.npm.taobao.org/mathml-tag-names/download/mathml-tag-names-2.1.3.tgz?cache=0&sync_timestamp=1615374040090&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmathml-tag-names%2Fdownload%2Fmathml-tag-names-2.1.3.tgz#4ddadd67308e780cf16a47685878ee27b736a0a3"
@@ -6693,6 +6757,11 @@ mdn-data@2.0.4:
   version "2.0.4"
   resolved "https://registry.nlark.com/mdn-data/download/mdn-data-2.0.4.tgz?cache=0&sync_timestamp=1619048669041&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fmdn-data%2Fdownload%2Fmdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"
   integrity sha1-aZs8OKxvHXKAkaZGULZdOIUC/Vs=
+
+mdurl@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.nlark.com/mdurl/download/mdurl-1.0.1.tgz#fe85b2ec75a59037f2adfec100fd6c601761152e"
+  integrity sha1-/oWy7HWlkDfyrf7BAP1sYBdhFS4=
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -8657,6 +8726,14 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+raw-loader@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.npm.taobao.org/raw-loader/download/raw-loader-4.0.2.tgz#1aac6b7d1ad1501e66efdac1522c73e59a584eb6"
+  integrity sha1-GqxrfRrRUB5m79rBUixz5ZpYTrY=
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
+
 rc9@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/rc9/download/rc9-1.2.0.tgz#ef098181fdde714efc4c426383d6e46c14b1254a"
@@ -10102,7 +10179,7 @@ tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.14.1.tgz?cache=0&sync_timestamp=1617647281845&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
 
-tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0:
+tslib@^2.0.3, tslib@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.2.0.tgz?cache=0&sync_timestamp=1617647281845&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha1-+yxHWXfjXiQTEe3iaTzuHsZpj1w=
@@ -10180,6 +10257,11 @@ ua-parser-js@^0.7.26:
   version "0.7.28"
   resolved "https://registry.npm.taobao.org/ua-parser-js/download/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
   integrity sha1-i6BOZT81ziECOcZGYWhb+RId7DE=
+
+uc.micro@^1.0.1, uc.micro@^1.0.5:
+  version "1.0.6"
+  resolved "https://registry.npm.taobao.org/uc.micro/download/uc.micro-1.0.6.tgz#9c411a802a409a91fc6cf74081baba34b24499ac"
+  integrity sha1-nEEagCpAmpH8bPdAgbq6NLJEmaw=
 
 ufo@^0.6.10:
   version "0.6.11"
@@ -10491,15 +10573,6 @@ vue-eslint-parser@^7.1.1, vue-eslint-parser@^7.6.0:
     esquery "^1.4.0"
     lodash "^4.17.15"
 
-vue-highlight.js@^4.0.1-beta:
-  version "4.0.1-beta"
-  resolved "https://registry.npm.taobao.org/vue-highlight.js/download/vue-highlight.js-4.0.1-beta.tgz#fc3081503461b69086b20cccb8e2bedeed64d99a"
-  integrity sha1-/DCBUDRhtpCGsgzMuOK+3u1k2Zo=
-  dependencies:
-    detect-indent "^6.0.0"
-    redent "^3.0.0"
-    tslib "^2.1.0"
-
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
@@ -10572,13 +10645,6 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.nlark.com/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
-
-vue-types@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npm.taobao.org/vue-types/download/vue-types-2.0.3.tgz#d4d3b124e8ae09e2d58785054451a6eb7e672d6d"
-  integrity sha1-1NOxJOiuCeLVh4UFRFGm635nLW0=
-  dependencies:
-    is-plain-object "3.0.1"
 
 vue@^2.6.12:
   version "2.6.12"
@@ -10814,7 +10880,7 @@ ws@^7.3.1:
   resolved "https://registry.npm.taobao.org/ws/download/ws-7.4.5.tgz?cache=0&sync_timestamp=1618734170256&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fws%2Fdownload%2Fws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
   integrity sha1-pITdhR6b62/bQgAn44hejOSJhsE=
 
-xss@^1.0.6:
+xss@^1.0.6, xss@^1.0.9:
   version "1.0.9"
   resolved "https://registry.nlark.com/xss/download/xss-1.0.9.tgz#3ffd565571ff60d2e40db7f3b80b4677bec770d2"
   integrity sha1-P/1WVXH/YNLkDbfzuAtGd77HcNI=

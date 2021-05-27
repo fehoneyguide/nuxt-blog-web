@@ -185,8 +185,8 @@ export default defineComponent({
         { required: true, message: '请输入标签名称', trigger: 'blur' },
       ],
     })
-    const handleEditChange = (_: string, render: string): void => {
-      content.value = render
+    const handleEditChange = (md: string, _: string): void => {
+      content.value = md
     }
     const handleChangeCover = (e: any): void => {
       const fileList = [...e.target.files]
@@ -211,8 +211,8 @@ export default defineComponent({
     }
     const handleConfirm = async (): Promise<void> => {
       const params: IParams = {
-        title: title.value || '测试标题',
-        content: content.value || '测试摘要',
+        title: title.value,
+        content: content.value,
         summary: formData.value.summary,
       }
 
