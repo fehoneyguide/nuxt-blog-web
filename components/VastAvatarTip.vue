@@ -32,6 +32,7 @@ export default defineComponent({
         id: 3,
         name: '登出',
         link: '',
+        classVal: 'el-icon-switch-button',
       },
     ])
     const handleClick = (): void => {

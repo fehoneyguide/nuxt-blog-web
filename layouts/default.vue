@@ -4,7 +4,7 @@
       <VastMainHeaderBox></VastMainHeaderBox>
       <nav class="view-nav">
         <ul class="sub-tag">
-          <li class="nav-item" v-for="item in subTitleList" :key="item.id">
+          <li v-for="item in subTitleList" :key="item.id" class="nav-item">
             <nuxt-link :to="item.to"> {{ item.name }}</nuxt-link>
           </li>
         </ul>
@@ -17,20 +17,18 @@
       <!-- <section class="box"></section> -->
     </div>
 
-    <div class="global-component-box"></div>
+    <div class="global-component-box">
+      <vast-suspension-panel></vast-suspension-panel>
+    </div>
   </div>
 </template>
 
 <script>
-import {
-  computed,
-  defineComponent,
-  useRoute,
-  watch,
-  ref,
-} from '@nuxtjs/composition-api'
+import { defineComponent, useRoute, watch, ref } from '@nuxtjs/composition-api'
+import VastSuspensionPanel from '~/components/VastSuspensionPanel.vue'
 
 export default defineComponent({
+  components: { VastSuspensionPanel },
   setup() {
     const route = useRoute()
     const routeUrl = ref('index')
@@ -77,6 +75,22 @@ export default defineComponent({
             id: '2',
             name: '抽奖进行时',
             to: '/events/lottery',
+          },
+        ]
+      } else if (routeUrl.value === 'label') {
+        subTitleList.value = [
+          {
+            id: '1',
+            name: '全部标签',
+            to: '/label',
+          },
+        ]
+      } else if (routeUrl.value === 'home') {
+        subTitleList.value = [
+          {
+            id: '1',
+            name: '全部文章',
+            to: '/home',
           },
         ]
       } else {

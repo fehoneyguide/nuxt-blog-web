@@ -10,7 +10,7 @@
         </div>
         <div class="right">
           <h3>10</h3>
-          <h6>Tag</h6>
+          <h6>Tags</h6>
         </div>
       </div>
       <hr />

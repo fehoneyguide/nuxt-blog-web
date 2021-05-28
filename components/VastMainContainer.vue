@@ -17,7 +17,7 @@
             </div>
           </div>
           <aside class="index-aside">
-            <VastIndexLogin v-if="!isShowLogin"></VastIndexLogin>
+            <VastIndexLogin v-if="!hasToken"></VastIndexLogin>
             <VastInfoWrapper></VastInfoWrapper>
           </aside>
         </div>
@@ -40,7 +40,7 @@ import { articleListApi } from '~/api'
 export default defineComponent({
   setup() {
     const store: Store<any> = useStore()
-    const isShowLogin = computed(() => store.state.user.isLogin)
+    const hasToken = computed(() => store.state.user.token)
     const lists = ref([])
     const fetchList = async (): Promise<void> => {
       try {
@@ -59,7 +59,7 @@ export default defineComponent({
       await fetchList()
     })
     return {
-      isShowLogin,
+      hasToken,
       lists,
     }
   },

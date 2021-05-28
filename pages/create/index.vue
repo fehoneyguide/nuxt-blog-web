@@ -24,10 +24,11 @@
         >
           <el-form-item label="添加标签" prop="labelName">
             <el-select
-              v-model="formData.labelName"
+              v-model="formData.labelVals"
               placeholder="请选择文章的标签"
               clearable
               filterable
+              multiple
               @change="handleSelectChange"
             >
               <el-option
@@ -40,7 +41,14 @@
             </el-select>
           </el-form-item>
           <el-form-item label="文章封面" prop="cover">
-            <div class="cover-upload">
+            <div
+              v-if="preCoverImgSrc"
+              class="preview-box"
+              @click.stop="handleUploadCover"
+            >
+              <img :src="preCoverImgSrc" alt="" />
+            </div>
+            <div v-else class="cover-upload">
               <button
                 class="select-btn"
                 type="button"
@@ -58,11 +66,21 @@
             </div>
           </el-form-item>
           <el-form-item label="编辑摘要" prop="summary">
-            <el-input
-              v-model="formData.summary"
-              type="textarea"
-              placeholder="请输入摘要"
-            ></el-input>
+            <div class="summary-box">
+              <span class="tip">12/100</span>
+              <div class="summary-textarea">
+                <textarea
+                  id="summ"
+                  v-model="formData.summary"
+                  name="sum"
+                  maxlength="100"
+                  spellcheck="false"
+                  cols="30"
+                  rows="5"
+                  autocomplete
+                ></textarea>
+              </div>
+            </div>
           </el-form-item>
 
           <div class="footer">
@@ -116,18 +134,17 @@ import {
 } from '@nuxtjs/composition-api'
 import type { Store } from 'vuex'
 
+import { Notification } from 'element-ui'
 import { labelListApi, createApi } from '~/api'
 
+import { $axios } from '~/utils/axios'
 interface IParams {
   title: string // 文章的标题
   summary: string // 文章摘要
   content: string // 文章内容
+  labelIds: string // 标签的id
+  coverImg: string // 封面图
 }
-interface IFormData {
-  labelName: string
-  summary: string
-}
-
 export default defineComponent({
   layout: 'editor',
   setup() {
@@ -135,6 +152,7 @@ export default defineComponent({
     const isShowPanel = computed(() => store.state.create.changeReleaseShow)
     const handBook: Ref<string> = ref('')
     const isShowFile: Ref<boolean> = ref(false)
+    const router = useRouter()
     const markdownOption: Ref<object> = ref({
       bold: true, // 粗体
       italic: true, // 斜体
@@ -174,28 +192,41 @@ export default defineComponent({
     const content: Ref<string> = ref('')
     const labelIds: Ref<string> = ref('')
     const formData = ref({
-      labelName: '',
+      labelVals: [],
       summary: '',
     })
 
     const lebelOptions = ref([])
+    const preCoverImgSrc = ref('')
 
     const formRules: Ref<object> = ref({
       labelName: [
         { required: true, message: '请输入标签名称', trigger: 'blur' },
       ],
+      summary: [{ required: true, message: '请输入摘要描述', trigger: 'blur' }],
     })
     const handleEditChange = (md: string, _: string): void => {
       content.value = md
     }
-    const handleChangeCover = (e: any): void => {
-      const fileList = [...e.target.files]
-      console.log(fileList)
-      if (fileList.length < 1) {
+    const handleChangeCover = async (e: any): Promise<void> => {
+      const file = e.target.files[0]
+      if (!file) {
         return
       } else {
-        const file = fileList[0]
-        console.log(file)
+        const fd = new FormData()
+        fd.append('cover', file)
+        console.log(fd)
+        $axios.setHeader('Content-Type', 'multipart/form-data', ['post'])
+        const res: any = await $axios({
+          url: 'upload/cover',
+          method: 'post',
+          data: fd,
+        })
+        console.log(res)
+        if (res.code === 0) {
+          preCoverImgSrc.value = res.data.coverImg
+        }
+        // $axios.post('/cover')
       }
       e.target.value = ''
     }
@@ -210,16 +241,52 @@ export default defineComponent({
       title.value = value
     }
     const handleConfirm = async (): Promise<void> => {
+      if (!title.value || !String(title).trim()) {
+        Notification.warning({
+          title: 'Tips',
+          message: '文章标题不能为空',
+        })
+        return
+      }
+
+      if (!content.value || !String(content.value).trim()) {
+        Notification.warning({
+          title: 'Tips',
+          message: '文章内容不能为空',
+        })
+        return
+      }
+      if (formData.value.labelVals.length < 1) {
+        Notification.warning({
+          title: 'Tips',
+          message: '请选择文章标签',
+        })
+        return
+      }
+      if (!formData.value.summary) {
+        Notification.warning({
+          title: 'Tips',
+          message: '文章摘要不能为为空',
+        })
+        return
+      }
       const params: IParams = {
         title: title.value,
         content: content.value,
         summary: formData.value.summary,
+        labelIds: formData.value.labelVals.join(','),
+        coverImg: preCoverImgSrc.value,
       }
 
       console.log(params)
       try {
-        const res = await createApi(params)
-        console.log(res)
+        const res: any = await createApi(params)
+        if (res.code === 0) {
+          Notification.success({ title: 'Tips', message: '创建文章成功' })
+          router.push('/home')
+        } else {
+          Notification.error({ title: 'Tips', message: '创建文章失败' })
+        }
       } catch (error) {}
     }
     const handleCancle = (): void => {
@@ -236,10 +303,8 @@ export default defineComponent({
         limit: 10,
       }
       try {
-        const res: any = await labelListApi(params)
-        if (res.code === 0) {
-          lebelOptions.value = res.data
-        }
+        await store.dispatch('label/getLabels', params)
+        lebelOptions.value = store.state.label.labelLists
       } catch (error) {}
     }
     onMounted(async () => {
@@ -261,6 +326,7 @@ export default defineComponent({
       handleCancle,
       handleUploadCover,
       handleChangeCover,
+      preCoverImgSrc,
     }
   },
   head: {},
@@ -344,6 +410,16 @@ export default defineComponent({
       .el-textarea {
         width: 335px;
       }
+      .preview-box {
+        position: relative;
+        width: 160px;
+        height: 86px;
+        overflow: hidden;
+        cursor: pointer;
+        img {
+          width: 100%;
+        }
+      }
       .cover-upload {
         .select-btn {
           width: 160px;
@@ -367,6 +443,49 @@ export default defineComponent({
               color: #86909c;
               margin-top: 20px;
             }
+          }
+        }
+      }
+      .summary-box {
+        position: relative;
+        width: 74%;
+        .tip {
+          color: rgb(238, 77, 56);
+          position: absolute;
+          right: 8px;
+          bottom: 8px;
+          font-size: 12px;
+          z-index: 9;
+        }
+        .summary-textarea {
+          position: relative;
+          width: 100%;
+          display: inline-block;
+          font-size: 14px;
+          line-height: 1.5;
+          vertical-align: middle;
+          border-collapse: separate;
+          border-spacing: 0;
+          #summ {
+            background: #fafafa;
+            border: 1px solid #e6e8eb;
+            border-radius: 2px;
+            position: relative;
+            width: 100%;
+            display: inline-block;
+            color: #282f38;
+            line-height: 1.5;
+            background-color: #fff;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            outline: 0;
+            font-size: 14px;
+            height: auto;
+            padding: 6px 10px;
+            vertical-align: top;
+            transition: all 0.3s, height 0s;
+            resize: vertical;
+            overflow: auto;
           }
         }
       }
